@@ -15,6 +15,8 @@ import com.qaprosoft.carina.demo.mobile.gui.pages.common.LoginPageBase;
 @DeviceType(pageType = Type.IOS_PHONE, parentClass = LoginPageBase.class)
 public class LoginPage extends LoginPageBase {
 
+	private static final String THIS_METHOD_IS_NOT_IMPLEMENTED_FOR_IOS = "This method is not yet implemented for iOS";
+
 	@FindBy(xpath = "type = 'XCUIElementTypeTextField'")
 	@Predicate
 	private ExtendedWebElement nameInputField;
@@ -59,6 +61,11 @@ public class LoginPage extends LoginPageBase {
 	}
 
 	@Override
+	public void selectFemaleSex() {
+		femaleRadioBtn.click();
+	}
+
+	@Override
 	public void checkPrivacyPolicyCheckbox() {
 		privacyPolicyCheckbox.click();
 	}
@@ -84,5 +91,32 @@ public class LoginPage extends LoginPageBase {
 		checkPrivacyPolicyCheckbox();
 		return clickLoginBtn();
 	}
+
+
+	@Override
+	public boolean isMaleSexChecked() {
+		throw new UnsupportedOperationException(THIS_METHOD_IS_NOT_IMPLEMENTED_FOR_IOS);
+	}
+
+	@Override
+	public boolean isFemaleSexChecked() {
+		throw new UnsupportedOperationException(THIS_METHOD_IS_NOT_IMPLEMENTED_FOR_IOS);
+	}
+
+	@Override
+	public boolean isPrivacyPolicyChecked() {
+		throw new UnsupportedOperationException(THIS_METHOD_IS_NOT_IMPLEMENTED_FOR_IOS);
+	}
+
+	@Override
+	public boolean isNamePrinted() {
+		throw new UnsupportedOperationException(THIS_METHOD_IS_NOT_IMPLEMENTED_FOR_IOS);
+	}
+
+	@Override
+	public boolean isPasswordPrinted() {
+		throw new UnsupportedOperationException(THIS_METHOD_IS_NOT_IMPLEMENTED_FOR_IOS);
+	}
+
 
 }

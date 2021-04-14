@@ -53,6 +53,11 @@ public class LoginPage extends LoginPageBase implements IMobileUtils {
     }
 
     @Override
+    public void selectFemaleSex() {
+        femaleRadioBtn.click();
+    }
+
+    @Override
     public void checkPrivacyPolicyCheckbox() {
         privacyPolicyCheckbox.click();
     }
@@ -77,6 +82,41 @@ public class LoginPage extends LoginPageBase implements IMobileUtils {
         selectMaleSex();
         checkPrivacyPolicyCheckbox();
         return clickLoginBtn();
+    }
+
+    @Override
+    public boolean isPageOpened() {
+        return nameInputField.isElementPresent() &&
+               passwordInputField.isElementPresent() &&
+               maleRadioBtn.isElementPresent() &&
+               femaleRadioBtn.isElementPresent() &&
+               privacyPolicyCheckbox.isElementPresent() &&
+               loginBtn.isElementPresent();
+    }
+
+    @Override
+    public boolean isMaleSexChecked() {
+        return maleRadioBtn.isChecked();
+    }
+
+    @Override
+    public boolean isFemaleSexChecked() {
+        return femaleRadioBtn.isChecked();
+    }
+
+    @Override
+    public boolean isPrivacyPolicyChecked() {
+        return privacyPolicyCheckbox.isChecked();
+    }
+
+    @Override
+    public boolean isNamePrinted(){
+        return nameInputField.getSize()!=null;
+    }
+
+    @Override
+    public boolean isPasswordPrinted(){
+        return passwordInputField.getSize()!=null;
     }
 
 }

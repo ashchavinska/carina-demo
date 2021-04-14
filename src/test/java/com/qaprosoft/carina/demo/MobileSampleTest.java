@@ -3,6 +3,7 @@ package com.qaprosoft.carina.demo;
 import com.zebrunner.agent.core.annotation.TestLabel;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.qaprosoft.carina.core.foundation.AbstractTest;
@@ -84,5 +85,35 @@ public class MobileSampleTest extends AbstractTest implements IMobileUtils {
         uiElements.clickOnOtherRadioButton();
         Assert.assertTrue(uiElements.isOthersRadioButtonSelected(), "Others radio button was not selected!");
     }
+
+
+
+    @Test(description = "01")
+    @MethodOwner(owner = "ashchavinska")
+    public void verifyLoginPage(){
+        String username = "Rachel Green";
+        String password = "1234567890";
+        WelcomePageBase welcomePage = initPage(getDriver(), WelcomePageBase.class);
+        LoginPageBase loginPage = welcomePage.clickNextBtn();
+        Assert.assertTrue(loginPage.isPageOpened(), "Login page isn't opened");
+        //verify fields are presented->they must be (name,password,male/female... already checked previously
+        Assert.assertFalse((loginPage.isMaleSexChecked() && loginPage.isFemaleSexChecked()), "Sex already checked");
+        Assert.assertFalse(loginPage.isPrivacyPolicyChecked(), "Privacy policy already checked");
+        loginPage.typeName(username);
+        loginPage.typePassword(password);
+        Assert.assertTrue((loginPage.isNamePrinted() && loginPage.isPasswordPrinted()), "Name field or password field is empty");
+        loginPage.selectFemaleSex();
+        Assert.assertTrue((loginPage.isMaleSexChecked() || loginPage.isFemaleSexChecked()), "Sex isn't checked");
+
+        Assert.assertFalse(loginPage.isLoginBtnActive(), "Login button is active when it should be disabled");
+
+        loginPage.checkPrivacyPolicyCheckbox();
+        Assert.assertTrue(loginPage.isPrivacyPolicyChecked(), "Privacy policy isn't checked");
+
+        CarinaDescriptionPageBase webViewPage = loginPage.clickLoginBtn();
+        Assert.assertTrue(webViewPage.isPageOpened(), "Carina description page isn't opened");
+    }
+
+
 
 }

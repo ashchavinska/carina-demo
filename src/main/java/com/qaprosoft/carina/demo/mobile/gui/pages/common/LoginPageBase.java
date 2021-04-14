@@ -16,6 +16,8 @@ public abstract class LoginPageBase extends AbstractPage {
 
 	public abstract void selectMaleSex();
 
+	public abstract void selectFemaleSex();
+
 	public abstract void checkPrivacyPolicyCheckbox();
 
 	public abstract CarinaDescriptionPageBase clickLoginBtn();
@@ -23,5 +25,16 @@ public abstract class LoginPageBase extends AbstractPage {
 	public abstract boolean isLoginBtnActive();
 
 	public abstract CarinaDescriptionPageBase login();
+
+
+	public abstract boolean isMaleSexChecked();
+
+	public abstract boolean isFemaleSexChecked();
+
+	public abstract boolean isPrivacyPolicyChecked();
+
+	public abstract boolean isNamePrinted();
+
+	public abstract boolean isPasswordPrinted();
 
 }
