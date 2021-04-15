@@ -26,15 +26,23 @@ public abstract class LoginPageBase extends AbstractPage {
 
 	public abstract CarinaDescriptionPageBase login();
 
-
 	public abstract boolean isMaleSexChecked();
 
 	public abstract boolean isFemaleSexChecked();
 
 	public abstract boolean isPrivacyPolicyChecked();
 
-	public abstract boolean isNamePrinted();
+	public abstract boolean isNamePrinted(String userName);
 
-	public abstract boolean isPasswordPrinted();
+	public abstract boolean isPasswordPrinted(String password);
 
+	public abstract boolean isNameFieldPresent();
+
+	public abstract boolean isPasswordFieldPresent();
+
+	public abstract boolean isMaleSexFieldPresent();
+
+	public abstract boolean isFemaleSexFieldPresent();
+
+	public abstract boolean isPrivacyPolicyCheckboxPresent();
 }

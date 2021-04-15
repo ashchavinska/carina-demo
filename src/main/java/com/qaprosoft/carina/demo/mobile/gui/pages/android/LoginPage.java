@@ -85,19 +85,25 @@ public class LoginPage extends LoginPageBase implements IMobileUtils {
     }
 
     @Override
-    public boolean isPageOpened() {
-        return nameInputField.isElementPresent() &&
-               passwordInputField.isElementPresent() &&
-               maleRadioBtn.isElementPresent() &&
-               femaleRadioBtn.isElementPresent() &&
-               privacyPolicyCheckbox.isElementPresent() &&
-               loginBtn.isElementPresent();
-    }
+    public boolean isPageOpened() { return loginBtn.isElementPresent(); }
 
     @Override
-    public boolean isMaleSexChecked() {
-        return maleRadioBtn.isChecked();
-    }
+    public boolean isNameFieldPresent() { return nameInputField.isElementPresent(); }
+
+    @Override
+    public boolean isPasswordFieldPresent() { return passwordInputField.isElementPresent(); }
+
+    @Override
+    public boolean isMaleSexFieldPresent() { return maleRadioBtn.isElementPresent(); }
+
+    @Override
+    public boolean isFemaleSexFieldPresent() { return femaleRadioBtn.isElementPresent(); }
+
+    @Override
+    public boolean isPrivacyPolicyCheckboxPresent() { return privacyPolicyCheckbox.isElementPresent(); }
+
+    @Override
+    public boolean isMaleSexChecked() { return maleRadioBtn.isChecked(); }
 
     @Override
     public boolean isFemaleSexChecked() {
@@ -110,13 +116,12 @@ public class LoginPage extends LoginPageBase implements IMobileUtils {
     }
 
     @Override
-    public boolean isNamePrinted(){
-        return nameInputField.getSize()!=null;
+    public boolean isNamePrinted(String userName){
+        return userName.equals(nameInputField.getText());
     }
 
     @Override
-    public boolean isPasswordPrinted(){
-        return passwordInputField.getSize()!=null;
+    public boolean isPasswordPrinted(String password){
+        return password.equals(passwordInputField.getText());
     }
-
 }

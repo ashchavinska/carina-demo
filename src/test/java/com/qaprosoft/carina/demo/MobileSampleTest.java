@@ -3,7 +3,6 @@ package com.qaprosoft.carina.demo;
 import com.zebrunner.agent.core.annotation.TestLabel;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.qaprosoft.carina.core.foundation.AbstractTest;
@@ -86,24 +85,32 @@ public class MobileSampleTest extends AbstractTest implements IMobileUtils {
         Assert.assertTrue(uiElements.isOthersRadioButtonSelected(), "Others radio button was not selected!");
     }
 
-
-
     @Test(description = "01")
     @MethodOwner(owner = "ashchavinska")
-    public void verifyLoginPage(){
-        String username = "Rachel Green";
+    public void verifyLoginPage() {
+        String userName = "Rachel Green";
         String password = "1234567890";
         WelcomePageBase welcomePage = initPage(getDriver(), WelcomePageBase.class);
         LoginPageBase loginPage = welcomePage.clickNextBtn();
         Assert.assertTrue(loginPage.isPageOpened(), "Login page isn't opened");
-        //verify fields are presented->they must be (name,password,male/female... already checked previously
-        Assert.assertFalse((loginPage.isMaleSexChecked() && loginPage.isFemaleSexChecked()), "Sex already checked");
+
+        Assert.assertTrue(loginPage.isNameFieldPresent(), "User name field isn't present");
+        Assert.assertTrue(loginPage.isPasswordFieldPresent(), "Password field isn't present");
+        Assert.assertTrue(loginPage.isMaleSexFieldPresent(), "MaleSex field isn't present");
+        Assert.assertTrue(loginPage.isFemaleSexFieldPresent(), "FemaleSex field isn't present");
+        Assert.assertTrue(loginPage.isPrivacyPolicyCheckboxPresent(), "Privacy policy checkbox field isn't present");
+
+        Assert.assertFalse(loginPage.isMaleSexChecked(), "MaleSex already checked");
+        Assert.assertFalse(loginPage.isFemaleSexChecked(), "FemaleSex already checked");
         Assert.assertFalse(loginPage.isPrivacyPolicyChecked(), "Privacy policy already checked");
-        loginPage.typeName(username);
+
+        loginPage.typeName(userName);
         loginPage.typePassword(password);
-        Assert.assertTrue((loginPage.isNamePrinted() && loginPage.isPasswordPrinted()), "Name field or password field is empty");
+        Assert.assertTrue(loginPage.isNamePrinted(userName), "Name field field is empty");
+        Assert.assertTrue(loginPage.isPasswordPrinted(password), "Password field is empty");
+
         loginPage.selectFemaleSex();
-        Assert.assertTrue((loginPage.isMaleSexChecked() || loginPage.isFemaleSexChecked()), "Sex isn't checked");
+        Assert.assertTrue(loginPage.isFemaleSexChecked(), "FemaleSex isn't checked");
 
         Assert.assertFalse(loginPage.isLoginBtnActive(), "Login button is active when it should be disabled");
 
@@ -113,7 +120,4 @@ public class MobileSampleTest extends AbstractTest implements IMobileUtils {
         CarinaDescriptionPageBase webViewPage = loginPage.clickLoginBtn();
         Assert.assertTrue(webViewPage.isPageOpened(), "Carina description page isn't opened");
     }
-
-
-
 }

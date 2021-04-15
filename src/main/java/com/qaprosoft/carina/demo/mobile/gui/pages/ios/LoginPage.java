@@ -109,14 +109,37 @@ public class LoginPage extends LoginPageBase {
 	}
 
 	@Override
-	public boolean isNamePrinted() {
+	public boolean isNamePrinted(String userName) {
 		throw new UnsupportedOperationException(THIS_METHOD_IS_NOT_IMPLEMENTED_FOR_IOS);
 	}
 
 	@Override
-	public boolean isPasswordPrinted() {
+	public boolean isPasswordPrinted(String password) {
 		throw new UnsupportedOperationException(THIS_METHOD_IS_NOT_IMPLEMENTED_FOR_IOS);
 	}
 
+	@Override
+	public boolean isNameFieldPresent() {
+		throw new UnsupportedOperationException(THIS_METHOD_IS_NOT_IMPLEMENTED_FOR_IOS);
+	}
 
+	@Override
+	public boolean isPasswordFieldPresent() {
+		throw new UnsupportedOperationException(THIS_METHOD_IS_NOT_IMPLEMENTED_FOR_IOS);
+	}
+
+	@Override
+	public boolean isMaleSexFieldPresent() {
+		throw new UnsupportedOperationException(THIS_METHOD_IS_NOT_IMPLEMENTED_FOR_IOS);
+	}
+
+	@Override
+	public boolean isFemaleSexFieldPresent() {
+		throw new UnsupportedOperationException(THIS_METHOD_IS_NOT_IMPLEMENTED_FOR_IOS);
+	}
+
+	@Override
+	public boolean isPrivacyPolicyCheckboxPresent() {
+		throw new UnsupportedOperationException(THIS_METHOD_IS_NOT_IMPLEMENTED_FOR_IOS);
+	}
 }
