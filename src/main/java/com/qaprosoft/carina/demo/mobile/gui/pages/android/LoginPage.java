@@ -85,25 +85,39 @@ public class LoginPage extends LoginPageBase implements IMobileUtils {
     }
 
     @Override
-    public boolean isPageOpened() { return loginBtn.isElementPresent(); }
+    public boolean isPageOpened() {
+        return loginBtn.isElementPresent();
+    }
 
     @Override
-    public boolean isNameFieldPresent() { return nameInputField.isElementPresent(); }
+    public boolean isNameFieldPresent() {
+        return nameInputField.isElementPresent();
+    }
 
     @Override
-    public boolean isPasswordFieldPresent() { return passwordInputField.isElementPresent(); }
+    public boolean isPasswordFieldPresent() {
+        return passwordInputField.isElementPresent();
+    }
 
     @Override
-    public boolean isMaleSexFieldPresent() { return maleRadioBtn.isElementPresent(); }
+    public boolean isMaleSexFieldPresent() {
+        return maleRadioBtn.isElementPresent();
+    }
 
     @Override
-    public boolean isFemaleSexFieldPresent() { return femaleRadioBtn.isElementPresent(); }
+    public boolean isFemaleSexFieldPresent() {
+        return femaleRadioBtn.isElementPresent();
+    }
 
     @Override
-    public boolean isPrivacyPolicyCheckboxPresent() { return privacyPolicyCheckbox.isElementPresent(); }
+    public boolean isPrivacyPolicyCheckboxPresent() {
+        return privacyPolicyCheckbox.isElementPresent();
+    }
 
     @Override
-    public boolean isMaleSexChecked() { return maleRadioBtn.isChecked(); }
+    public boolean isMaleSexChecked() {
+        return maleRadioBtn.isChecked();
+    }
 
     @Override
     public boolean isFemaleSexChecked() {
