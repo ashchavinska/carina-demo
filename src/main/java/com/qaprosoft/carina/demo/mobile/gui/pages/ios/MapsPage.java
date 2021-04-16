@@ -2,23 +2,23 @@ package com.qaprosoft.carina.demo.mobile.gui.pages.ios;
 
 import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
-import com.qaprosoft.carina.core.foundation.webdriver.locator.ExtendedFindBy;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.MapsPageBase;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.FindBy;
 
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = MapsPageBase.class)
 public class MapsPage extends MapsPageBase {
 
     private static final String THIS_METHOD_IS_NOT_IMPLEMENTED_FOR_IOS = "This method is not yet implemented for iOS";
 
-    @ExtendedFindBy(androidUIAutomator = "new UiSelector().text(\"Map\")")
+    @FindBy(xpath = " ")
     private ExtendedWebElement pageTittle;
 
-    @ExtendedFindBy(androidUIAutomator = "new UiSelector().descriptionContains(\"Zoom in\")")
+    @FindBy(xpath = " ")
     private ExtendedWebElement zoomInBtn;
 
-    @ExtendedFindBy(androidUIAutomator = "new UiSelector().descriptionContains(\"Zoom out\")")
+    @FindBy(xpath = " ")
     private ExtendedWebElement zoomOutBtn;
 
 
