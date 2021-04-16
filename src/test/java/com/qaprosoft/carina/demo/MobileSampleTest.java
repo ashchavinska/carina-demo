@@ -16,6 +16,7 @@ import com.qaprosoft.carina.demo.mobile.gui.pages.common.WebViewPageBase;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.WelcomePageBase;
 import com.qaprosoft.carina.demo.utils.MobileContextUtils;
 import com.qaprosoft.carina.demo.utils.MobileContextUtils.View;
+import org.testng.asserts.SoftAssert;
 
 
 public class MobileSampleTest extends AbstractTest implements IMobileUtils {
@@ -85,4 +86,41 @@ public class MobileSampleTest extends AbstractTest implements IMobileUtils {
         Assert.assertTrue(uiElements.isOthersRadioButtonSelected(), "Others radio button was not selected!");
     }
 
+    @Test(description = "01")
+    @MethodOwner(owner = "ashchavinska")
+    public void verifyLoginPage() {
+        String userName = "Rachel Green";
+        String password = "1234567890";
+        SoftAssert softAssert = new SoftAssert();
+        WelcomePageBase welcomePage = initPage(getDriver(), WelcomePageBase.class);
+        LoginPageBase loginPage = welcomePage.clickNextBtn();
+        Assert.assertTrue(loginPage.isPageOpened(), "Login page isn't opened");
+
+        softAssert.assertTrue(loginPage.isNameFieldPresent(), "User name field isn't present");
+        softAssert.assertTrue(loginPage.isPasswordFieldPresent(), "Password field isn't present");
+        softAssert.assertTrue(loginPage.isMaleSexFieldPresent(), "MaleSex field isn't present");
+        softAssert.assertTrue(loginPage.isFemaleSexFieldPresent(), "FemaleSex field isn't present");
+        softAssert.assertTrue(loginPage.isPrivacyPolicyCheckboxPresent(), "Privacy policy checkbox field isn't present");
+
+        softAssert.assertFalse(loginPage.isMaleSexChecked(), "MaleSex already checked");
+        softAssert.assertFalse(loginPage.isFemaleSexChecked(), "FemaleSex already checked");
+        softAssert.assertFalse(loginPage.isPrivacyPolicyChecked(), "Privacy policy already checked");
+
+        loginPage.typeName(userName);
+        softAssert.assertTrue(loginPage.isNamePrinted(userName), "Name field field is empty");
+        loginPage.typePassword(password);
+        softAssert.assertTrue(loginPage.isPasswordPrinted(password), "Password field is empty");
+        loginPage.selectFemaleSex();
+        softAssert.assertTrue(loginPage.isFemaleSexChecked(), "FemaleSex isn't checked");
+
+        Assert.assertFalse(loginPage.isLoginBtnActive(), "Login button is active when it should be disabled");
+
+        loginPage.checkPrivacyPolicyCheckbox();
+        Assert.assertTrue(loginPage.isPrivacyPolicyChecked(), "Privacy policy isn't checked");
+
+        CarinaDescriptionPageBase webViewPage = loginPage.clickLoginBtn();
+        Assert.assertTrue(webViewPage.isPageOpened(), "Carina description page isn't opened");
+
+        softAssert.assertAll();
+    }
 }
