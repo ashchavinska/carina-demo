@@ -8,7 +8,7 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = MapsPageBase.class)
-public class MapsPage  extends MapsPageBase {
+public class MapsPage extends MapsPageBase {
 
     private static final String THIS_METHOD_IS_NOT_IMPLEMENTED_FOR_IOS = "This method is not yet implemented for iOS";
 
