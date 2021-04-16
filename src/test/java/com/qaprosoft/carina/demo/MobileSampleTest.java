@@ -1,5 +1,6 @@
 package com.qaprosoft.carina.demo;
 
+import com.qaprosoft.carina.demo.mobile.gui.pages.common.*;
 import com.zebrunner.agent.core.annotation.TestLabel;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
@@ -122,5 +123,32 @@ public class MobileSampleTest extends AbstractTest implements IMobileUtils {
         Assert.assertTrue(webViewPage.isPageOpened(), "Carina description page isn't opened");
 
         softAssert.assertAll();
+    }
+
+    @Test(description = "02")
+    @MethodOwner(owner = "ashchavinska")
+    public void verifyMapFeature() {
+        String userName = "Monica Bing";
+        String password = "0987654321";
+
+        WelcomePageBase welcomePage = initPage(getDriver(), WelcomePageBase.class);
+        LoginPageBase loginPage = welcomePage.clickNextBtn();
+        Assert.assertTrue(loginPage.isPageOpened(), "Login page isn't opened");
+
+        loginPage.typeName(userName);
+        loginPage.typePassword(password);
+        loginPage.selectFemaleSex();
+        loginPage.checkPrivacyPolicyCheckbox();
+
+        CarinaDescriptionPageBase webViewPage = loginPage.clickLoginBtn();
+        Assert.assertTrue(webViewPage.isPageOpened(), "WebView page isn't opened");
+
+        MapsPageBase mapPage = webViewPage.navigateToMapPage();
+        Assert.assertTrue(mapPage.isPageOpened(), "Map page isn't opened");
+
+        Assert.assertTrue(mapPage.isZoomInBtnPresent(), "Zoom in button isn't present");
+        Assert.assertTrue(mapPage.isZoomOutBtnPresent(), "Zoom out button isn't present");
+
+        Assert.assertTrue(mapPage.zoomInCoord().getY()<mapPage.zoomOutCoord().getY(), "Zoom In button isn't above Zoom Out button");
     }
 }
