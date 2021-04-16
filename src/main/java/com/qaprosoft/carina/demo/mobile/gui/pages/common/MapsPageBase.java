@@ -1,27 +1,20 @@
 package com.qaprosoft.carina.demo.mobile.gui.pages.common;
 
 import com.qaprosoft.carina.core.gui.AbstractPage;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 
-public class MapsPageBase extends AbstractPage {
+public abstract class MapsPageBase extends AbstractPage {
 
     public MapsPageBase(WebDriver driver) {
         super(driver);
     }
 
-    public boolean isZoomInBtnPresent() {
-        return false;
-    }
+    public abstract boolean isZoomInBtnPresent();
 
-    public boolean isZoomOutBtnPresent() {
-        return false;
-    }
+    public abstract boolean isZoomOutBtnPresent();
 
-    public String zoomInCoord() {
-        return " ";
-    }
+    public abstract Point zoomInCoord();
 
-    public String zoomOutCoord() {
-        return " ";
-    }
+    public abstract Point zoomOutCoord();
 }

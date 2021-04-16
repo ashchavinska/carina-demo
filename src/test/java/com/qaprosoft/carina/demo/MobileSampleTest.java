@@ -149,8 +149,6 @@ public class MobileSampleTest extends AbstractTest implements IMobileUtils {
         Assert.assertTrue(mapPage.isZoomInBtnPresent(), "Zoom in button isn't present");
         Assert.assertTrue(mapPage.isZoomOutBtnPresent(), "Zoom out button isn't present");
 
-        Integer zoomInCoordinates = Integer.parseInt(mapPage.zoomInCoord().substring(16, 20));
-        Integer zoomOutCoordinates = Integer.parseInt(mapPage.zoomOutCoord().substring(5, 9));
-        Assert.assertTrue(zoomInCoordinates<zoomOutCoordinates, "Zoom In button isn't above Zoom Out button");
+        Assert.assertTrue(mapPage.zoomInCoord().getY()<mapPage.zoomOutCoord().getY(), "Zoom In button isn't above Zoom Out button");
     }
 }
