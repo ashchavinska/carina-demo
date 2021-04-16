@@ -100,11 +100,11 @@ public class MobileSampleTest extends AbstractTest implements IMobileUtils {
         softAssert.assertTrue(loginPage.isPasswordFieldPresent(), "Password field isn't present");
         softAssert.assertTrue(loginPage.isMaleSexFieldPresent(), "MaleSex field isn't present");
         softAssert.assertTrue(loginPage.isFemaleSexFieldPresent(), "FemaleSex field isn't present");
-        Assert.assertTrue(loginPage.isPrivacyPolicyCheckboxPresent(), "Privacy policy checkbox field isn't present");
+        softAssert.assertTrue(loginPage.isPrivacyPolicyCheckboxPresent(), "Privacy policy checkbox field isn't present");
 
         softAssert.assertFalse(loginPage.isMaleSexChecked(), "MaleSex already checked");
         softAssert.assertFalse(loginPage.isFemaleSexChecked(), "FemaleSex already checked");
-        Assert.assertFalse(loginPage.isPrivacyPolicyChecked(), "Privacy policy already checked");
+        softAssert.assertFalse(loginPage.isPrivacyPolicyChecked(), "Privacy policy already checked");
 
         loginPage.typeName(userName);
         softAssert.assertTrue(loginPage.isNamePrinted(userName), "Name field field is empty");
