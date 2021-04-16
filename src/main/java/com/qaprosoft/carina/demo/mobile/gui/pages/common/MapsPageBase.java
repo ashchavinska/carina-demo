@@ -9,4 +9,19 @@ public class MapsPageBase extends AbstractPage {
         super(driver);
     }
 
+    public boolean isZoomInBtnPresent() {
+        return false;
+    }
+
+    public boolean isZoomOutBtnPresent() {
+        return false;
+    }
+
+    public String zoomInCoord() {
+        return " ";
+    }
+
+    public String zoomOutCoord() {
+        return " ";
+    }
 }

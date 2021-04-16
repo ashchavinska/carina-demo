@@ -1,5 +1,6 @@
 package com.qaprosoft.carina.demo;
 
+import com.qaprosoft.carina.demo.mobile.gui.pages.common.*;
 import com.zebrunner.agent.core.annotation.TestLabel;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
@@ -8,12 +9,6 @@ import org.testng.annotations.Test;
 import com.qaprosoft.carina.core.foundation.AbstractTest;
 import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
-import com.qaprosoft.carina.demo.mobile.gui.pages.common.CarinaDescriptionPageBase;
-import com.qaprosoft.carina.demo.mobile.gui.pages.common.ContactUsPageBase;
-import com.qaprosoft.carina.demo.mobile.gui.pages.common.LoginPageBase;
-import com.qaprosoft.carina.demo.mobile.gui.pages.common.UIElementsPageBase;
-import com.qaprosoft.carina.demo.mobile.gui.pages.common.WebViewPageBase;
-import com.qaprosoft.carina.demo.mobile.gui.pages.common.WelcomePageBase;
 import com.qaprosoft.carina.demo.utils.MobileContextUtils;
 import com.qaprosoft.carina.demo.utils.MobileContextUtils.View;
 import org.testng.asserts.SoftAssert;
@@ -122,5 +117,34 @@ public class MobileSampleTest extends AbstractTest implements IMobileUtils {
         Assert.assertTrue(webViewPage.isPageOpened(), "Carina description page isn't opened");
 
         softAssert.assertAll();
+    }
+
+    @Test(description = "02")
+    @MethodOwner(owner = "ashchavinska")
+    public void verifyMapFeature() {
+        String userName = "Monica Bing";
+        String password = "0987654321";
+
+        WelcomePageBase welcomePage = initPage(getDriver(), WelcomePageBase.class);
+        LoginPageBase loginPage = welcomePage.clickNextBtn();
+        Assert.assertTrue(loginPage.isPageOpened(), "Login page isn't opened");
+
+        loginPage.typeName(userName);
+        loginPage.typePassword(password);
+        loginPage.selectFemaleSex();
+        loginPage.checkPrivacyPolicyCheckbox();
+
+        CarinaDescriptionPageBase webViewPage = loginPage.clickLoginBtn();
+        Assert.assertTrue(webViewPage.isPageOpened(), "WebView page isn't opened");
+
+        MapsPageBase mapPage = webViewPage.navigateToMapPage();
+        Assert.assertTrue(mapPage.isPageOpened(), "Map page isn't opened");
+
+        Assert.assertTrue(mapPage.isZoomInBtnPresent(), "Zoom in button isn't present");
+        Assert.assertTrue(mapPage.isZoomOutBtnPresent(), "Zoom out button isn't present");
+
+        Integer plusCoordinates = Integer.parseInt(mapPage.zoomInCoord().substring(16, 20));
+        Integer minusCoordinates = Integer.parseInt(mapPage.zoomOutCoord().substring(5, 9));
+        Assert.assertTrue(plusCoordinates<minusCoordinates, "Plus button isn't above minus button");
     }
 }
