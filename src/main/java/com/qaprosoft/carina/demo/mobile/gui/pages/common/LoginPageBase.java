@@ -32,9 +32,9 @@ public abstract class LoginPageBase extends AbstractPage {
 
 	public abstract boolean isPrivacyPolicyChecked();
 
-	public abstract boolean isNamePrinted(String userName);
+	public abstract String printedName();
 
-	public abstract boolean isPasswordPrinted(String password);
+	public abstract String printedPassword();
 
 	public abstract boolean isNameFieldPresent();
 

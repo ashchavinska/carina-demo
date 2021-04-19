@@ -109,12 +109,12 @@ public class LoginPage extends LoginPageBase {
 	}
 
 	@Override
-	public boolean isNamePrinted(String userName) {
+	public String printedName() {
 		throw new UnsupportedOperationException(THIS_METHOD_IS_NOT_IMPLEMENTED_FOR_IOS);
 	}
 
 	@Override
-	public boolean isPasswordPrinted(String password) {
+	public String printedPassword() {
 		throw new UnsupportedOperationException(THIS_METHOD_IS_NOT_IMPLEMENTED_FOR_IOS);
 	}
 

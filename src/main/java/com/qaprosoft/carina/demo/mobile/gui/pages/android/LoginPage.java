@@ -1,6 +1,7 @@
 package com.qaprosoft.carina.demo.mobile.gui.pages.android;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -10,6 +11,9 @@ import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.CarinaDescriptionPageBase;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.LoginPageBase;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 @DeviceType(pageType = Type.ANDROID_PHONE, parentClass = LoginPageBase.class)
 public class LoginPage extends LoginPageBase implements IMobileUtils {
@@ -31,6 +35,8 @@ public class LoginPage extends LoginPageBase implements IMobileUtils {
 
     @FindBy(id = "login_button")
     private ExtendedWebElement loginBtn;
+
+    final Wait<WebDriver> wait = new WebDriverWait(driver, 5);
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -86,31 +92,37 @@ public class LoginPage extends LoginPageBase implements IMobileUtils {
 
     @Override
     public boolean isPageOpened() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login_button")));
         return loginBtn.isElementPresent();
     }
 
     @Override
     public boolean isNameFieldPresent() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login_button")));
         return nameInputField.isElementPresent();
     }
 
     @Override
     public boolean isPasswordFieldPresent() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login_button")));
         return passwordInputField.isElementPresent();
     }
 
     @Override
     public boolean isMaleSexFieldPresent() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login_button")));
         return maleRadioBtn.isElementPresent();
     }
 
     @Override
     public boolean isFemaleSexFieldPresent() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login_button")));
         return femaleRadioBtn.isElementPresent();
     }
 
     @Override
     public boolean isPrivacyPolicyCheckboxPresent() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login_button")));
         return privacyPolicyCheckbox.isElementPresent();
     }
 
@@ -130,12 +142,12 @@ public class LoginPage extends LoginPageBase implements IMobileUtils {
     }
 
     @Override
-    public boolean isNamePrinted(String userName){
-        return userName.equals(nameInputField.getText());
+    public String printedName(){
+        return nameInputField.getText();
     }
 
     @Override
-    public boolean isPasswordPrinted(String password){
-        return password.equals(passwordInputField.getText());
+    public String printedPassword(){
+        return passwordInputField.getText();
     }
 }
