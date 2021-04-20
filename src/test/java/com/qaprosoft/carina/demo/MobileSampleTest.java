@@ -93,6 +93,7 @@ public class MobileSampleTest extends AbstractTest implements IMobileUtils {
         String userName = "Rachel Green";
         String password = "1234567890";
         SoftAssert softAssert = new SoftAssert();
+
         WelcomePageBase welcomePage = initPage(getDriver(), WelcomePageBase.class);
         LoginPageBase loginPage = welcomePage.clickNextBtn();
         Assert.assertTrue(loginPage.isPageOpened(), "Login page isn't opened");
@@ -108,9 +109,9 @@ public class MobileSampleTest extends AbstractTest implements IMobileUtils {
         softAssert.assertFalse(loginPage.isPrivacyPolicyChecked(), "Privacy policy already checked");
 
         loginPage.typeName(userName);
-        softAssert.assertTrue(loginPage.isNamePrinted(userName), "Name field field is empty");
+        softAssert.assertEquals(loginPage.printedName(), userName, "Printed name doesn't match with entered");
         loginPage.typePassword(password);
-        softAssert.assertTrue(loginPage.isPasswordPrinted(password), "Password field is empty");
+        softAssert.assertEquals(loginPage.printedPassword(), password, "Printed password doesn't match with entered");
         loginPage.selectFemaleSex();
         softAssert.assertTrue(loginPage.isFemaleSexChecked(), "FemaleSex isn't checked");
 
