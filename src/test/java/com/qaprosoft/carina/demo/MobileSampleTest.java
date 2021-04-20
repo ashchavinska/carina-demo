@@ -32,7 +32,6 @@ public class MobileSampleTest extends AbstractTest implements IMobileUtils {
         welcomePage = initPage(getDriver(), WelcomePageBase.class);
     }
 
-
     @Test(groups = "running", description = "JIRA#DEMO-0011")
     @MethodOwner(owner = "qpsdemo")
     @TestLabel(name = "feature", value = {"mobile", "regression"})
@@ -70,7 +69,6 @@ public class MobileSampleTest extends AbstractTest implements IMobileUtils {
             "message was not sent or captcha was not displayed");
     }
 
-
     @Test(groups = "running", description = "JIRA#DEMO-0011")
     @MethodOwner(owner = "qpsdemo")
     @TestLabel(name = "feature", value = {"mobile", "acceptance"})
@@ -95,7 +93,6 @@ public class MobileSampleTest extends AbstractTest implements IMobileUtils {
         uiElements.clickOnOtherRadioButton();
         Assert.assertTrue(uiElements.isOthersRadioButtonSelected(), "Others radio button was not selected!");
     }
-
 
     @Test(groups = "running", description = "01")
     @MethodOwner(owner = "ashchavinska")
@@ -132,7 +129,6 @@ public class MobileSampleTest extends AbstractTest implements IMobileUtils {
 
         softAssert.assertAll();
     }
-
 
     @Test(groups = "running", description = "02")
     @MethodOwner(owner = "ashchavinska")
