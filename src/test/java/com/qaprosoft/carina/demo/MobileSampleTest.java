@@ -2,8 +2,8 @@ package com.qaprosoft.carina.demo;
 
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.*;
 import com.zebrunner.agent.core.annotation.TestLabel;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.qaprosoft.carina.core.foundation.AbstractTest;
@@ -21,18 +21,26 @@ import org.testng.asserts.SoftAssert;
 
 
 public class MobileSampleTest extends AbstractTest implements IMobileUtils {
+    WelcomePageBase welcomePage;
+    String userName;
+    String password;
 
-    @Test(description = "JIRA#DEMO-0011")
+    @BeforeMethod(alwaysRun = true)
+    public void initWelcomePage(){
+        userName = "Rachel Green";
+        password = "1234567890";
+        welcomePage = initPage(getDriver(), WelcomePageBase.class);
+    }
+
+
+    @Test(groups = "running", description = "JIRA#DEMO-0011")
     @MethodOwner(owner = "qpsdemo")
     @TestLabel(name = "feature", value = {"mobile", "regression"})
     public void testLoginUser() {
-        String username = "Test user";
-        String password = RandomStringUtils.randomAlphabetic(10);
-        WelcomePageBase welcomePage = initPage(getDriver(), WelcomePageBase.class);
         Assert.assertTrue(welcomePage.isPageOpened(), "Welcome page isn't opened");
         LoginPageBase loginPage = welcomePage.clickNextBtn();
         Assert.assertFalse(loginPage.isLoginBtnActive(), "Login button is active when it should be disabled");
-        loginPage.typeName(username);
+        loginPage.typeName(userName);
         loginPage.typePassword(password);
         loginPage.selectMaleSex();
         loginPage.checkPrivacyPolicyCheckbox();
@@ -40,11 +48,12 @@ public class MobileSampleTest extends AbstractTest implements IMobileUtils {
         Assert.assertTrue(carinaDescriptionPage.isPageOpened(), "Carina description page isn't opened");
     }
 
+    //fail
 	@Test(description = "JIRA#DEMO-0011")
     @MethodOwner(owner = "qpsdemo")
     @TestLabel(name = "feature", value = {"mobile", "regression"})
     public void testWebView() {
-        WelcomePageBase welcomePage = initPage(getDriver(), WelcomePageBase.class);
+        //WelcomePageBase welcomePage = initPage(getDriver(), WelcomePageBase.class);
         LoginPageBase loginPage = welcomePage.clickNextBtn();
         loginPage.login();
         WebViewPageBase webViewPageBase = initPage(getDriver(), WebViewPageBase.class);
@@ -61,11 +70,11 @@ public class MobileSampleTest extends AbstractTest implements IMobileUtils {
             "message was not sent or captcha was not displayed");
     }
 
-    @Test(description = "JIRA#DEMO-0011")
+
+    @Test(groups = "running", description = "JIRA#DEMO-0011")
     @MethodOwner(owner = "qpsdemo")
     @TestLabel(name = "feature", value = {"mobile", "acceptance"})
     public void testUIElements() {
-        WelcomePageBase welcomePage = initPage(getDriver(), WelcomePageBase.class);
         LoginPageBase loginPage = welcomePage.clickNextBtn();
         CarinaDescriptionPageBase carinaDescriptionPage = loginPage.login();
         UIElementsPageBase uiElements = carinaDescriptionPage.navigateToUIElementsPage();
@@ -87,14 +96,12 @@ public class MobileSampleTest extends AbstractTest implements IMobileUtils {
         Assert.assertTrue(uiElements.isOthersRadioButtonSelected(), "Others radio button was not selected!");
     }
 
-    @Test(description = "01")
+
+    @Test(groups = "running", description = "01")
     @MethodOwner(owner = "ashchavinska")
     public void verifyLoginPage() {
-        String userName = "Rachel Green";
-        String password = "1234567890";
         SoftAssert softAssert = new SoftAssert();
 
-        WelcomePageBase welcomePage = initPage(getDriver(), WelcomePageBase.class);
         LoginPageBase loginPage = welcomePage.clickNextBtn();
         Assert.assertTrue(loginPage.isPageOpened(), "Login page isn't opened");
 
@@ -126,13 +133,10 @@ public class MobileSampleTest extends AbstractTest implements IMobileUtils {
         softAssert.assertAll();
     }
 
-    @Test(description = "02")
+
+    @Test(groups = "running", description = "02")
     @MethodOwner(owner = "ashchavinska")
     public void verifyMapFeature() {
-        String userName = "Monica Bing";
-        String password = "0987654321";
-
-        WelcomePageBase welcomePage = initPage(getDriver(), WelcomePageBase.class);
         LoginPageBase loginPage = welcomePage.clickNextBtn();
         Assert.assertTrue(loginPage.isPageOpened(), "Login page isn't opened");
 

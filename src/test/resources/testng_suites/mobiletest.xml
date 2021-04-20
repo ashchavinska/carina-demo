@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Mobile tests (Android)" verbose="1" parallel="methods">
+
+    <test name="Mobile test">
+        <groups>
+            <run>
+                <include name = "running"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.qaprosoft.carina.demo.MobileSampleTest" />
+        </classes>
+    </test>
+
+</suite>
