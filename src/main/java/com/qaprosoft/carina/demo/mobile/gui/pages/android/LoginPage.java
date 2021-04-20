@@ -44,38 +44,38 @@ public class LoginPage extends LoginPageBase implements IMobileUtils {
 
     @Override
     public void typeName(String name) {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("name")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(nameInputField.getBy()));
         nameInputField.type(name);
         hideKeyboard();
     }
 
     @Override
     public void typePassword(String password) {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("password")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(passwordInputField.getBy()));
         passwordInputField.type(password);
     }
 
     @Override
     public void selectMaleSex() {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("radio_male")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(maleRadioBtn.getBy()));
         maleRadioBtn.click();
     }
 
     @Override
     public void selectFemaleSex() {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("radio_female")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(femaleRadioBtn.getBy()));
         femaleRadioBtn.click();
     }
 
     @Override
     public void checkPrivacyPolicyCheckbox() {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("checkbox")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(privacyPolicyCheckbox.getBy()));
         privacyPolicyCheckbox.click();
     }
 
     @Override
     public CarinaDescriptionPageBase clickLoginBtn() {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login_button")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(loginBtn.getBy()));
         loginBtn.click();
         return initPage(getDriver(), CarinaDescriptionPageBase.class);
     }
