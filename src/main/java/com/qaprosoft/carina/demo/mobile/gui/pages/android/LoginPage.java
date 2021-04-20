@@ -44,12 +44,14 @@ public class LoginPage extends LoginPageBase implements IMobileUtils {
 
     @Override
     public void typeName(String name) {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("name")));
         nameInputField.type(name);
         hideKeyboard();
     }
 
     @Override
     public void typePassword(String password) {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("password")));
         passwordInputField.type(password);
     }
 
