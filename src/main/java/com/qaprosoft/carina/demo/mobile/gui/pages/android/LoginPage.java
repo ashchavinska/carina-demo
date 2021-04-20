@@ -55,21 +55,25 @@ public class LoginPage extends LoginPageBase implements IMobileUtils {
 
     @Override
     public void selectMaleSex() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("radio_male")));
         maleRadioBtn.click();
     }
 
     @Override
     public void selectFemaleSex() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("radio_female")));
         femaleRadioBtn.click();
     }
 
     @Override
     public void checkPrivacyPolicyCheckbox() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("checkbox")));
         privacyPolicyCheckbox.click();
     }
 
     @Override
     public CarinaDescriptionPageBase clickLoginBtn() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login_button")));
         loginBtn.click();
         return initPage(getDriver(), CarinaDescriptionPageBase.class);
     }
@@ -92,37 +96,31 @@ public class LoginPage extends LoginPageBase implements IMobileUtils {
 
     @Override
     public boolean isPageOpened() {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login_button")));
         return loginBtn.isElementPresent();
     }
 
     @Override
     public boolean isNameFieldPresent() {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login_button")));
         return nameInputField.isElementPresent();
     }
 
     @Override
     public boolean isPasswordFieldPresent() {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login_button")));
         return passwordInputField.isElementPresent();
     }
 
     @Override
     public boolean isMaleSexFieldPresent() {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login_button")));
         return maleRadioBtn.isElementPresent();
     }
 
     @Override
     public boolean isFemaleSexFieldPresent() {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login_button")));
         return femaleRadioBtn.isElementPresent();
     }
 
     @Override
     public boolean isPrivacyPolicyCheckboxPresent() {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login_button")));
         return privacyPolicyCheckbox.isElementPresent();
     }
 
