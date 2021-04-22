@@ -14,6 +14,9 @@ import org.testng.asserts.SoftAssert;
 
 public class WebArenaTest extends AbstractTest {
 
+    private String invalid_email = "qwerty@gmail.com";
+    private String invalid_password = "qwerty";
+
     @Test(description = "04")
     @MethodOwner(owner = "ashchavinska")
     public void verifyHeaderComponents() {
@@ -43,6 +46,7 @@ public class WebArenaTest extends AbstractTest {
     @MethodOwner(owner = "ashchavinska")
     public void verifySuccessLogin() {
         UserService userService = new UserService();
+        User user = userService.getUser();
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page doesn't open");
@@ -50,8 +54,8 @@ public class WebArenaTest extends AbstractTest {
         LoginField loginField = homePage.getHeader().openLoginField();
         Assert.assertTrue(loginField.isLoginFieldPresent(), "Login field doesn't present");
 
-        loginField.enterEmail(userService.getUser().getEmail());
-        loginField.enterPassword(userService.getUser().getEmail());
+        loginField.enterEmail(user.getEmail());
+        loginField.enterPassword(user.getPassword());
         loginField.clickLoginButton();
         Assert.assertTrue(homePage.getHeader().isLogOutIconPresent(), "Home page doesn't open");
     }
@@ -60,6 +64,7 @@ public class WebArenaTest extends AbstractTest {
     @MethodOwner(owner = "ashchavinska")
     public void verifyLoginWithWrongEmail() {
         UserService userService = new UserService();
+        User user = userService.getUser();
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page doesn't open");
@@ -67,8 +72,8 @@ public class WebArenaTest extends AbstractTest {
         LoginField loginField = homePage.getHeader().openLoginField();
         Assert.assertTrue(loginField.isLoginFieldPresent(), "Login field doesn't present");
 
-        loginField.enterEmail(userService.getUserWithInvalidEmail().getEmail());
-        loginField.enterPassword(userService.getUserWithInvalidEmail().getPassword());
+        loginField.enterEmail(invalid_email);
+        loginField.enterPassword(user.getPassword());
         LoginPage loginPage = loginField.clickLoginButton();
         Assert.assertEquals(loginPage.getLoginStatus(), WebConstants.GSMARENA_LOGIN_FAIL, "Login not failed");
         Assert.assertEquals(loginPage.loginFailReason(), WebConstants.GSMARENA_LOGIN_FAIL_EMAIL, "Reason is different");
@@ -78,6 +83,7 @@ public class WebArenaTest extends AbstractTest {
     @MethodOwner(owner = "ashchavinska")
     public void verifyLoginWithWrongPassword() {
         UserService userService = new UserService();
+        User user = userService.getUser();
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page doesn't open");
@@ -85,8 +91,8 @@ public class WebArenaTest extends AbstractTest {
         LoginField loginField = homePage.getHeader().openLoginField();
         Assert.assertTrue(loginField.isLoginFieldPresent(), "Login field doesn't present");
 
-        loginField.enterEmail(userService.getUserWithInvalidPassword().getEmail());
-        loginField.enterPassword(userService.getUserWithInvalidPassword().getPassword());
+        loginField.enterEmail(user.getEmail());
+        loginField.enterPassword(invalid_password);
         LoginPage loginPage = loginField.clickLoginButton();
         Assert.assertEquals(loginPage.getLoginStatus(), WebConstants.GSMARENA_LOGIN_FAIL, "Login not failed");
         Assert.assertEquals(loginPage.loginFailReason(), WebConstants.GSMARENA_LOGIN_FAIL_PASSWORD, "Reason is different");

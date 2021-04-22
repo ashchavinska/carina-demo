@@ -43,7 +43,7 @@ public class Header extends AbstractUIObject {
     @FindBy(xpath = "//a[@class='signup-icon no-margin-right']")
     private ExtendedWebElement signUpIcon;
 
-    @FindBy(id = "nick-submit")
+    @FindBy(xpath = "//i[@class='head-icon icon-signout']")
     private ExtendedWebElement logOutIcon;
 
     public Header(WebDriver driver, SearchContext searchContext) {
