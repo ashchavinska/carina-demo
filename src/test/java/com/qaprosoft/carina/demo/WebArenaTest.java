@@ -1,6 +1,7 @@
 package com.qaprosoft.carina.demo;
 
 import com.qaprosoft.carina.demo.gui.components.*;
+import com.qaprosoft.carina.demo.gui.constants.WebConstants;
 import com.qaprosoft.carina.demo.gui.pages.LoginPage;
 import com.qaprosoft.carina.demo.gui.services.UserService;
 import org.testng.Assert;
@@ -69,8 +70,8 @@ public class WebArenaTest extends AbstractTest {
         loginField.enterEmail(userService.getUserWithInvalidEmail().getEmail());
         loginField.enterPassword(userService.getUserWithInvalidEmail().getPassword());
         LoginPage loginPage = loginField.clickLoginButton();
-        Assert.assertEquals(loginPage.getLoginStatus(), "Login failed.", "Login not failed");
-        Assert.assertEquals(loginPage.loginFailReason(), "Reason: User record not found.", "Reason is different");
+        Assert.assertEquals(loginPage.getLoginStatus(), WebConstants.GSMARENA_LOGIN_FAIL, "Login not failed");
+        Assert.assertEquals(loginPage.loginFailReason(), WebConstants.GSMARENA_LOGIN_FAIL_EMAIL, "Reason is different");
     }
 
     @Test(description = "05/3")
@@ -87,7 +88,7 @@ public class WebArenaTest extends AbstractTest {
         loginField.enterEmail(userService.getUserWithInvalidPassword().getEmail());
         loginField.enterPassword(userService.getUserWithInvalidPassword().getPassword());
         LoginPage loginPage = loginField.clickLoginButton();
-        Assert.assertEquals(loginPage.getLoginStatus(), "Login failed.", "Login not failed");
-        Assert.assertEquals(loginPage.loginFailReason(), "Reason: Wrong password.", "Reason is different");
+        Assert.assertEquals(loginPage.getLoginStatus(), WebConstants.GSMARENA_LOGIN_FAIL, "Login not failed");
+        Assert.assertEquals(loginPage.loginFailReason(), WebConstants.GSMARENA_LOGIN_FAIL_PASSWORD, "Reason is different");
     }
 }
