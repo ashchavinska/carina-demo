@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import com.qaprosoft.carina.core.foundation.AbstractTest;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
 import com.qaprosoft.carina.demo.gui.pages.HomePage;
+import org.testng.asserts.SoftAssert;
 
 public class WebArenaTest extends AbstractTest {
 
@@ -19,23 +20,26 @@ public class WebArenaTest extends AbstractTest {
     @Test(description = "04")
     @MethodOwner(owner = "ashchavinska")
     public void verifyHeaderComponents() {
+        SoftAssert softAssert = new SoftAssert();
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page doesn't open");
         Assert.assertTrue(homePage.isHeaderPresent(), "Header doesn't present");
 
         Header header = homePage.getHeader();
-        Assert.assertTrue(header.isBurgerMenuPresent(), "Burger menu doesn't present");
-        Assert.assertTrue(header.isLogoPresent(), "Logo doesn't present");
-        Assert.assertTrue(header.isSearchFieldPresent(), "Search field doesn't present");
-        Assert.assertTrue(header.isTipIconPresent(), "Tip icon doesn't present");
-        Assert.assertTrue(header.isFacebookIconPresent(), "Facebook icon doesn't present");
-        Assert.assertTrue(header.isTwitterIconPresent(), "Twitter icon doesn't present");
-        Assert.assertTrue(header.isInstagramIconPresent(), "Instagram icon doesn't present");
-        Assert.assertTrue(header.isYouTubeIconPresent(), "YouTube icon doesn't present");
-        Assert.assertTrue(header.isRssIconPresent(), "Rss icon doesn't present");
-        Assert.assertTrue(header.isLoginIconPresent(), "Login icon doesn't present");
-        Assert.assertTrue(header.isSignUpIconPresent(), "SignUp icon doesn't present");
+        softAssert.assertTrue(header.isBurgerMenuPresent(), "Burger menu doesn't present");
+        softAssert.assertTrue(header.isLogoPresent(), "Logo doesn't present");
+        softAssert.assertTrue(header.isSearchFieldPresent(), "Search field doesn't present");
+        softAssert.assertTrue(header.isTipIconPresent(), "Tip icon doesn't present");
+        softAssert.assertTrue(header.isFacebookIconPresent(), "Facebook icon doesn't present");
+        softAssert.assertTrue(header.isTwitterIconPresent(), "Twitter icon doesn't present");
+        softAssert.assertTrue(header.isInstagramIconPresent(), "Instagram icon doesn't present");
+        softAssert.assertTrue(header.isYouTubeIconPresent(), "YouTube icon doesn't present");
+        softAssert.assertTrue(header.isRssIconPresent(), "Rss icon doesn't present");
+        softAssert.assertTrue(header.isLoginIconPresent(), "Login icon doesn't present");
+        softAssert.assertTrue(header.isSignUpIconPresent(), "SignUp icon doesn't present");
+
+        softAssert.assertAll();
     }
 
     @Test(description = "05/1")
@@ -51,7 +55,7 @@ public class WebArenaTest extends AbstractTest {
         loginField.enterEmail(valid_email);
         loginField.enterPassword(valid_password);
         LoginPage loginPage = loginField.clickLoginButton();
-        Assert.assertEquals(loginPage.isLoginSuccess(), "Login successful.", "Login unsuccessful");
+        Assert.assertEquals(loginPage.getLoginStatus(), "Login successful.", "Login unsuccessful");
     }
 
     @Test(description = "05/2")
@@ -67,8 +71,8 @@ public class WebArenaTest extends AbstractTest {
         loginField.enterEmail(invalid_email);
         loginField.enterPassword(valid_password);
         LoginPage loginPage = loginField.clickLoginButton();
-        Assert.assertEquals(loginPage.isLoginSuccess(), "Login failed.", "Login not failed");
-        Assert.assertEquals(loginPage.loginFailReason(), "Reason: User record not found.", "reason is different");
+        Assert.assertEquals(loginPage.getLoginStatus(), "Login failed.", "Login not failed");
+        Assert.assertEquals(loginPage.loginFailReason(), "Reason: User record not found.", "Reason is different");
     }
 
     @Test(description = "05/3")
@@ -84,7 +88,7 @@ public class WebArenaTest extends AbstractTest {
         loginField.enterEmail(valid_email);
         loginField.enterPassword(invalid_password);
         LoginPage loginPage = loginField.clickLoginButton();
-        Assert.assertEquals(loginPage.isLoginSuccess(), "Login failed.", "Login not failed");
-        Assert.assertEquals(loginPage.loginFailReason(), "Reason: Wrong password.", "reason is different");
+        Assert.assertEquals(loginPage.getLoginStatus(), "Login failed.", "Login not failed");
+        Assert.assertEquals(loginPage.loginFailReason(), "Reason: Wrong password.", "Reason is different");
     }
 }

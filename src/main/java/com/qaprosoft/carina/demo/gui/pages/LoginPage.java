@@ -17,7 +17,7 @@ public class LoginPage extends AbstractPage {
         super(driver);
     }
 
-    public String isLoginSuccess() {
+    public String getLoginStatus() {
         return loginResult.getText();
     }
 
