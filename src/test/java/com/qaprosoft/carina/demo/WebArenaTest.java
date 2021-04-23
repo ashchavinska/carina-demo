@@ -15,6 +15,8 @@ import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
 import com.qaprosoft.carina.demo.gui.pages.HomePage;
 import org.testng.asserts.SoftAssert;
 
+import java.util.List;
+
 public class WebArenaTest extends AbstractTest {
 
     private String invalid_email = "qwerty@gmail.com";
@@ -113,12 +115,31 @@ public class WebArenaTest extends AbstractTest {
         Assert.assertEquals(newsPage.getPageTitle(), "News", "News page doesn't open");
 
         NewsPageItem newsItems = newsPage.pickNews(0);
-        String titleFromNewsPage = newsItems.readTitle();
+        String titleFromNewsPage = newsItems.getTitle();
 
         ArticlePage articlePage = newsItems.clickNews();
         Assert.assertEquals(articlePage.postYouCommBtn(), "POST YOUR COMMENT", "Article page doesn't open");
         String titleArticlePage = articlePage.getTitle();
 
         Assert.assertEquals(titleArticlePage, titleFromNewsPage, "Titles doesn't match");
+    }
+
+    @Test(description = "07")
+    @MethodOwner(owner = "ashchavinska")
+    public void verifySearchingProcess() {
+        UserService userService = new UserService();
+        User user = userService.getUser();
+        LoginService loginService = new LoginService();
+        HomePage homePage = loginService.login(user.getEmail(), user.getPassword());
+
+        NewsPage newsPage = homePage.getFooterMenu().openNewsPage();
+        Assert.assertEquals(newsPage.getPageTitle(), "News", "News page doesn't open");
+
+        final String search = "iPhone";
+        List<NewsPageItem> searchRes = newsPage.searchNews(search);
+        Assert.assertTrue(searchRes.size()>0, "Search result is fail");
+        for (NewsPageItem item : searchRes) {
+            Assert.assertTrue(item.getTitle().toLowerCase().contains(search.toLowerCase()), "Search result is not as required");
+        }
     }
 }

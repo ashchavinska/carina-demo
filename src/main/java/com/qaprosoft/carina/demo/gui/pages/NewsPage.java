@@ -43,8 +43,8 @@ public class NewsPage extends AbstractPage {
         setPageURL("/news.php3");
     }
     
-    public List<NewsPageItem> searchNews(String q) {
-        searchTextField.type(q);
+    public List<NewsPageItem> searchNews(String text) {
+        searchTextField.type(text);
         searchButton.click();
         return news;
     }

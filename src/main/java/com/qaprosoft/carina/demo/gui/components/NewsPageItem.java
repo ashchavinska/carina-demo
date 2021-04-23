@@ -32,7 +32,7 @@ public class NewsPageItem extends AbstractUIObject {
         super(driver, sc);
     }
     
-    public String readTitle() {
+    public String getTitle() {
         return titleLink.getElement().getText();
     }
 

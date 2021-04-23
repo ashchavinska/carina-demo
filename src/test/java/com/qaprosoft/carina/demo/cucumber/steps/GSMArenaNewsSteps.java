@@ -47,8 +47,8 @@ public class GSMArenaNewsSteps extends CucumberRunner {
         List<NewsPageItem> news = newsPage.searchNews(searchQ);
         Assert.assertFalse(CollectionUtils.isEmpty(news), "News not found!");
         for(NewsPageItem n : news) {
-            System.out.println(n.readTitle());
-            Assert.assertTrue(StringUtils.containsIgnoreCase(n.readTitle(), searchQ), "Invalid search results!");
+            System.out.println(n.getTitle());
+            Assert.assertTrue(StringUtils.containsIgnoreCase(n.getTitle(), searchQ), "Invalid search results!");
         }
     }
 
