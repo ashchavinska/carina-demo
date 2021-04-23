@@ -2,7 +2,10 @@ package com.qaprosoft.carina.demo;
 
 import com.qaprosoft.carina.demo.gui.components.*;
 import com.qaprosoft.carina.demo.gui.constants.WebConstants;
+import com.qaprosoft.carina.demo.gui.pages.ArticlePage;
 import com.qaprosoft.carina.demo.gui.pages.LoginPage;
+import com.qaprosoft.carina.demo.gui.pages.NewsPage;
+import com.qaprosoft.carina.demo.gui.services.LoginService;
 import com.qaprosoft.carina.demo.gui.services.UserService;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -96,5 +99,26 @@ public class WebArenaTest extends AbstractTest {
         LoginPage loginPage = loginField.clickLoginButton();
         Assert.assertEquals(loginPage.getLoginStatus(), WebConstants.GSMARENA_LOGIN_FAIL, "Login not failed");
         Assert.assertEquals(loginPage.loginFailReason(), WebConstants.GSMARENA_LOGIN_FAIL_PASSWORD, "Reason is different");
+    }
+
+    @Test(description = "06")
+    @MethodOwner(owner = "ashchavinska")
+    public void verifyArticleName() {
+        UserService userService = new UserService();
+        User user = userService.getUser();
+        LoginService loginService = new LoginService();
+        HomePage homePage = loginService.login(user.getEmail(), user.getPassword());
+
+        NewsPage newsPage = homePage.getFooterMenu().openNewsPage();
+        Assert.assertEquals(newsPage.getPageTitle(), "News", "News page doesn't open");
+
+        NewsPageItem newsItems = newsPage.pickNews(0);
+        String titleFromNewsPage = newsItems.readTitle();
+
+        ArticlePage articlePage = newsItems.clickNews();
+        Assert.assertEquals(articlePage.postYouCommBtn(), "POST YOUR COMMENT", "Article page doesn't open");
+        String titleArticlePage = articlePage.getTitle();
+
+        Assert.assertEquals(titleArticlePage, titleFromNewsPage, "Titles doesn't match");
     }
 }

@@ -20,7 +20,7 @@ import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
 import com.qaprosoft.carina.core.foundation.webdriver.Screenshot;
 import com.qaprosoft.carina.core.foundation.webdriver.core.capability.impl.desktop.ChromeCapabilities;
 import com.qaprosoft.carina.core.foundation.webdriver.core.capability.impl.desktop.FirefoxCapabilities;
-import com.qaprosoft.carina.demo.gui.components.NewsItem;
+import com.qaprosoft.carina.demo.gui.components.NewsPageItem;
 import com.qaprosoft.carina.demo.gui.pages.HomePage;
 import com.qaprosoft.carina.demo.gui.pages.NewsPage;
 import org.apache.commons.collections.CollectionUtils;
@@ -52,11 +52,11 @@ public class WebMultipleBrowserTest extends AbstractTest {
 
         NewsPage newsPage = chromeHomePage.getFooterMenu().openNewsPage();
         final String searchQ = "iphone";
-        List<NewsItem> news = newsPage.searchNews(searchQ);
+        List<NewsPageItem> news = newsPage.searchNews(searchQ);
         Screenshot.capture(chromeHomePage.getDriver(), "Chrome capture!");
         Assert.assertFalse(CollectionUtils.isEmpty(news), "News not found!");
 
-        for(NewsItem n : news) {
+        for(NewsPageItem n : news) {
             System.out.println(n.readTitle());
             Assert.assertTrue(StringUtils.containsIgnoreCase(n.readTitle(), searchQ), "Invalid search results!");
         }
