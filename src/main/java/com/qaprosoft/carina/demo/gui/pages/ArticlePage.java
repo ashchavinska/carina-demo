@@ -21,7 +21,7 @@ public class ArticlePage extends AbstractPage {
         return title.getText();
     }
 
-    public String postYouCommBtn() {
+    public String getTextFromPostYouCommBtn() {
         return postYourCommentBtn.getText();
     }
 }

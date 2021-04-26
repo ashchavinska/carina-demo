@@ -23,6 +23,9 @@ import org.openqa.selenium.support.FindBy;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.demo.gui.components.NewsPageItem;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class NewsPage extends AbstractPage {
     
@@ -37,7 +40,9 @@ public class NewsPage extends AbstractPage {
 
     @FindBy(xpath="//h1[@class='article-info-name']")
     private ExtendedWebElement pageTitle;
-    
+
+    final Wait<WebDriver> wait = new WebDriverWait(driver, 5);
+
     public NewsPage(WebDriver driver) {
         super(driver);
         setPageURL("/news.php3");
@@ -54,6 +59,7 @@ public class NewsPage extends AbstractPage {
     }
 
     public String getPageTitle(){
+        wait.until(ExpectedConditions.presenceOfElementLocated(pageTitle.getBy()));
         return pageTitle.getText();
     }
 }
