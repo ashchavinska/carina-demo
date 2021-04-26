@@ -28,7 +28,7 @@ import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
 import com.qaprosoft.carina.core.foundation.utils.tag.Priority;
 import com.qaprosoft.carina.core.foundation.utils.tag.TestPriority;
 import com.qaprosoft.carina.demo.gui.components.FooterMenu;
-import com.qaprosoft.carina.demo.gui.components.NewsItem;
+import com.qaprosoft.carina.demo.gui.components.NewsPageItem;
 import com.qaprosoft.carina.demo.gui.components.compare.ModelSpecs;
 import com.qaprosoft.carina.demo.gui.components.compare.ModelSpecs.SpecType;
 import com.qaprosoft.carina.demo.gui.pages.BrandModelsPage;
@@ -102,11 +102,11 @@ public class WebSampleTest extends AbstractTest {
         Assert.assertTrue(newsPage.isPageOpened(), "News page is not opened!");
         
         final String searchQ = "iphone";
-        List<NewsItem> news = newsPage.searchNews(searchQ);
+        List<NewsPageItem> news = newsPage.searchNews(searchQ);
         Assert.assertFalse(CollectionUtils.isEmpty(news), "News not found!");
-        for(NewsItem n : news) {
-            System.out.println(n.readTitle());
-            Assert.assertTrue(StringUtils.containsIgnoreCase(n.readTitle(), searchQ), "Invalid search results!");
+        for(NewsPageItem n : news) {
+            System.out.println(n.getTitle());
+            Assert.assertTrue(StringUtils.containsIgnoreCase(n.getTitle(), searchQ), "Invalid search results!");
         }
     }
 

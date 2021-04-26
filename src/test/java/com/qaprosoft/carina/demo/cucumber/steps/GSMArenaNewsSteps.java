@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
 
 import com.qaprosoft.carina.core.foundation.cucumber.CucumberRunner;
-import com.qaprosoft.carina.demo.gui.components.NewsItem;
+import com.qaprosoft.carina.demo.gui.components.NewsPageItem;
 import com.qaprosoft.carina.demo.gui.pages.HomePage;
 import com.qaprosoft.carina.demo.gui.pages.NewsPage;
 
@@ -44,11 +44,11 @@ public class GSMArenaNewsSteps extends CucumberRunner {
     @And("^page 'News' should contains all items$")
     public void pageSettingsShouldContainsAllItems() {
         final String searchQ = "iphone";
-        List<NewsItem> news = newsPage.searchNews(searchQ);
+        List<NewsPageItem> news = newsPage.searchNews(searchQ);
         Assert.assertFalse(CollectionUtils.isEmpty(news), "News not found!");
-        for(NewsItem n : news) {
-            System.out.println(n.readTitle());
-            Assert.assertTrue(StringUtils.containsIgnoreCase(n.readTitle(), searchQ), "Invalid search results!");
+        for(NewsPageItem n : news) {
+            System.out.println(n.getTitle());
+            Assert.assertTrue(StringUtils.containsIgnoreCase(n.getTitle(), searchQ), "Invalid search results!");
         }
     }
 
