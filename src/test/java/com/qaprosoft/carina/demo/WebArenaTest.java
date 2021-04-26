@@ -28,21 +28,21 @@ public class WebArenaTest extends AbstractTest {
         SoftAssert softAssert = new SoftAssert();
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
-        Assert.assertTrue(homePage.isPageOpened(), "Home page doesn't open");
-        Assert.assertTrue(homePage.isHeaderPresent(), "Header doesn't present");
+        Assert.assertTrue(homePage.isPageOpened(), "Home page isn't open");
+        Assert.assertTrue(homePage.isHeaderPresent(), "Header isn't present");
 
         Header header = homePage.getHeader();
-        softAssert.assertTrue(header.isBurgerMenuPresent(), "Burger menu doesn't present");
-        softAssert.assertTrue(header.isLogoPresent(), "Logo doesn't present");
-        softAssert.assertTrue(header.isSearchFieldPresent(), "Search field doesn't present");
-        softAssert.assertTrue(header.isTipIconPresent(), "Tip icon doesn't present");
-        softAssert.assertTrue(header.isFacebookIconPresent(), "Facebook icon doesn't present");
-        softAssert.assertTrue(header.isTwitterIconPresent(), "Twitter icon doesn't present");
-        softAssert.assertTrue(header.isInstagramIconPresent(), "Instagram icon doesn't present");
-        softAssert.assertTrue(header.isYouTubeIconPresent(), "YouTube icon doesn't present");
-        softAssert.assertTrue(header.isRssIconPresent(), "Rss icon doesn't present");
-        softAssert.assertTrue(header.isLoginIconPresent(), "Login icon doesn't present");
-        softAssert.assertTrue(header.isSignUpIconPresent(), "SignUp icon doesn't present");
+        softAssert.assertTrue(header.isBurgerMenuPresent(), "Burger menu isn't present");
+        softAssert.assertTrue(header.isLogoPresent(), "Logo isn't present");
+        softAssert.assertTrue(header.isSearchFieldPresent(), "Search field isn't present");
+        softAssert.assertTrue(header.isTipIconPresent(), "Tip icon isn't present");
+        softAssert.assertTrue(header.isFacebookIconPresent(), "Facebook icon isn't present");
+        softAssert.assertTrue(header.isTwitterIconPresent(), "Twitter icon isn't present");
+        softAssert.assertTrue(header.isInstagramIconPresent(), "Instagram icon isn't present");
+        softAssert.assertTrue(header.isYouTubeIconPresent(), "YouTube icon isn't present");
+        softAssert.assertTrue(header.isRssIconPresent(), "Rss icon isn't present");
+        softAssert.assertTrue(header.isLoginIconPresent(), "Login icon isn't present");
+        softAssert.assertTrue(header.isSignUpIconPresent(), "SignUp icon isn't present");
 
         softAssert.assertAll();
     }
@@ -54,15 +54,15 @@ public class WebArenaTest extends AbstractTest {
         User user = userService.getUser();
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
-        Assert.assertTrue(homePage.isPageOpened(), "Home page doesn't open");
+        Assert.assertTrue(homePage.isPageOpened(), "Home page isn't open");
 
         LoginField loginField = homePage.getHeader().openLoginField();
-        Assert.assertTrue(loginField.isLoginFieldPresent(), "Login field doesn't present");
+        Assert.assertTrue(loginField.isLoginFieldPresent(), "Login field isn't present");
 
         loginField.enterEmail(user.getEmail());
         loginField.enterPassword(user.getPassword());
         loginField.clickLoginButton();
-        Assert.assertTrue(homePage.getHeader().isLogOutIconPresent(), "Home page doesn't open");
+        Assert.assertTrue(homePage.getHeader().isLogOutIconPresent(), "Home page isn't open");
     }
 
     @Test(description = "05/2")
@@ -72,10 +72,10 @@ public class WebArenaTest extends AbstractTest {
         User user = userService.getUser();
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
-        Assert.assertTrue(homePage.isPageOpened(), "Home page doesn't open");
+        Assert.assertTrue(homePage.isPageOpened(), "Home page isn't open");
 
         LoginField loginField = homePage.getHeader().openLoginField();
-        Assert.assertTrue(loginField.isLoginFieldPresent(), "Login field doesn't present");
+        Assert.assertTrue(loginField.isLoginFieldPresent(), "Login field isn't present");
 
         loginField.enterEmail(invalid_email);
         loginField.enterPassword(user.getPassword());
@@ -91,10 +91,10 @@ public class WebArenaTest extends AbstractTest {
         User user = userService.getUser();
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
-        Assert.assertTrue(homePage.isPageOpened(), "Home page doesn't open");
+        Assert.assertTrue(homePage.isPageOpened(), "Home page isn't open");
 
         LoginField loginField = homePage.getHeader().openLoginField();
-        Assert.assertTrue(loginField.isLoginFieldPresent(), "Login field doesn't present");
+        Assert.assertTrue(loginField.isLoginFieldPresent(), "Login field isn't present");
 
         loginField.enterEmail(user.getEmail());
         loginField.enterPassword(invalid_password);
@@ -112,17 +112,17 @@ public class WebArenaTest extends AbstractTest {
         HomePage homePage = loginService.login(user.getEmail(), user.getPassword());
 
         NewsPage newsPage = homePage.getFooterMenu().openNewsPage();
-        Assert.assertEquals(newsPage.getPageTitle(), "News", "\'News\' title doesn't detect. News page doesn't open");
+        Assert.assertEquals(newsPage.getPageTitle(), "News", "\'News\' title isn't detected. News page isn't open");
 
         NewsPageItem newsItems = newsPage.pickNews(0);
         String titleFromNewsPage = newsItems.getTitle();
 
         ArticlePage articlePage = newsItems.clickNews();
         Assert.assertEquals(articlePage.getTextFromPostYouCommBtn(), "POST YOUR COMMENT",
-                "\'POST YOUR COMMENT\' button doesn't detect. Article page doesn't open");
+                "\'POST YOUR COMMENT\' button isn't detect. Article page isn't open");
         String titleArticlePage = articlePage.getTitle();
 
-        Assert.assertEquals(titleArticlePage, titleFromNewsPage, "Titles doesn't match");
+        Assert.assertEquals(titleArticlePage, titleFromNewsPage, "Titles isn't match");
     }
 
     @Test(description = "07")
@@ -134,7 +134,7 @@ public class WebArenaTest extends AbstractTest {
         HomePage homePage = loginService.login(user.getEmail(), user.getPassword());
 
         NewsPage newsPage = homePage.getFooterMenu().openNewsPage();
-        Assert.assertEquals(newsPage.getPageTitle(), "News", "\'News\' title doesn't detect. News page doesn't open");
+        Assert.assertEquals(newsPage.getPageTitle(), "News", "\'News\' title isn't detect. News page isn't open");
 
         final String search = "iPhone";
         List<NewsPageItem> searchRes = newsPage.searchNews(search);
