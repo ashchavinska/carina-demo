@@ -1,10 +1,9 @@
 package com.qaprosoft.carina.demo;
 
+import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.demo.gui.components.*;
 import com.qaprosoft.carina.demo.gui.constants.WebConstants;
-import com.qaprosoft.carina.demo.gui.pages.ArticlePage;
-import com.qaprosoft.carina.demo.gui.pages.LoginPage;
-import com.qaprosoft.carina.demo.gui.pages.NewsPage;
+import com.qaprosoft.carina.demo.gui.pages.*;
 import com.qaprosoft.carina.demo.gui.services.LoginService;
 import com.qaprosoft.carina.demo.gui.services.UserService;
 import org.testng.Assert;
@@ -12,10 +11,11 @@ import org.testng.annotations.Test;
 
 import com.qaprosoft.carina.core.foundation.AbstractTest;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
-import com.qaprosoft.carina.demo.gui.pages.HomePage;
 import org.testng.asserts.SoftAssert;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class WebArenaTest extends AbstractTest {
 
@@ -142,4 +142,39 @@ public class WebArenaTest extends AbstractTest {
             Assert.assertTrue(item.getTitle().toLowerCase().contains(search.toLowerCase()), "Search result is not as required");
         }
     }
+
+    @Test(description = "08")
+    @MethodOwner(owner = "ashchavinska")
+    public void verifyGlossaryParagraphHeaderAndTextByFirstLetter() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        Assert.assertTrue(homePage.isPageOpened(), "Home page isn't open");
+
+        GlossaryPage glossaryPage = homePage.getFooterMenu().openGlossaryPage();
+        Assert.assertTrue(glossaryPage.isGlossaryPageOpen(), "Glossary page isn't open");
+
+        List<ExtendedWebElement> titles = glossaryPage.getParagraphTitles();
+        List<ParagraphContent> contents = glossaryPage.getParagraphContents();
+        Assert.assertTrue(titles.size()==contents.size(), "Size isn't match");
+
+        for (int i = 0; i < titles.size(); i++) {
+            ExtendedWebElement title = titles.get(i);
+            List<ExtendedWebElement> content = contents.get(i).getTitle();
+            for (ExtendedWebElement item : content) {
+                String itemFirstChar = Character.toString(item.toString().charAt(0));
+                if (title.toString().equals("0 - 9")){
+                    try {
+                        int a = Integer.parseInt(itemFirstChar);
+                        Assert.assertTrue(a>=0, "First char isn't match");
+                    } catch (NumberFormatException e) {
+                        Assert.assertTrue(false, "Can't format to integer");
+                    }
+                }
+                else {
+                    Assert.assertEquals(itemFirstChar.toLowerCase(), title.toString().toLowerCase(), "First char isn't match");
+                }
+            }
+        }
+    }
+
 }
