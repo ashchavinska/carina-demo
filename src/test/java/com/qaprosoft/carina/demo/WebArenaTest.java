@@ -153,28 +153,22 @@ public class WebArenaTest extends AbstractTest {
         GlossaryPage glossaryPage = homePage.getFooterMenu().openGlossaryPage();
         Assert.assertTrue(glossaryPage.isGlossaryPageOpen(), "Glossary page isn't open");
 
-        List<ExtendedWebElement> titles = glossaryPage.getParagraphTitles();
+        List<String> titles = glossaryPage.getParagraphTitles();
         List<ParagraphContent> contents = glossaryPage.getParagraphContents();
-        Assert.assertTrue(titles.size()==contents.size(), "Size isn't match");
+        Assert.assertTrue(titles.size()==contents.size(), "Size doesn't match");
 
         for (int i = 0; i < titles.size(); i++) {
-            ExtendedWebElement title = titles.get(i);
-            List<ExtendedWebElement> content = contents.get(i).getTitle();
-            for (ExtendedWebElement item : content) {
-                String itemFirstChar = Character.toString(item.toString().charAt(0));
-                if (title.toString().equals("0 - 9")){
-                    try {
-                        int a = Integer.parseInt(itemFirstChar);
-                        Assert.assertTrue(a>=0, "First char isn't match");
-                    } catch (NumberFormatException e) {
-                        Assert.assertTrue(false, "Can't format to integer");
-                    }
+            String title = titles.get(i);
+            List<String> content = contents.get(i).getElements();
+            for (String item : content) {
+                char itemFirstChar = item.charAt(0);
+                if (title.equals("0 - 9")) {
+                    Assert.assertTrue(Character.isDigit(itemFirstChar), "First char doesn't match");
                 }
                 else {
-                    Assert.assertEquals(itemFirstChar.toLowerCase(), title.toString().toLowerCase(), "First char isn't match");
+                    Assert.assertEquals(Character.toLowerCase(itemFirstChar), Character.toLowerCase(title.charAt(0)), "First char doesn't match");
                 }
             }
         }
     }
-
 }

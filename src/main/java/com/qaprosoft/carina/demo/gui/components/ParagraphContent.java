@@ -6,6 +6,7 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ParagraphContent extends AbstractUIObject {
@@ -17,7 +18,11 @@ public class ParagraphContent extends AbstractUIObject {
         super(driver, sc);
     }
 
-    public List<ExtendedWebElement> getTitle() {
-        return title;
+    public List<String> getElements() {
+        List<String> listOfElements = new ArrayList<String>();
+        for (ExtendedWebElement oneElement : title){
+            listOfElements.add(oneElement.getText());
+        }
+        return listOfElements;
     }
 }

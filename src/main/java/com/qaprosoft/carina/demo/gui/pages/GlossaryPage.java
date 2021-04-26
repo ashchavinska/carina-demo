@@ -28,12 +28,15 @@ public class GlossaryPage extends AbstractPage {
         return title.isPresent() && title.getText().equals("Mobile terms glossary");
     }
 
-    public List<ExtendedWebElement> getParagraphTitles() {
-        return paragraphTitles;
+    public List<String> getParagraphTitles() {
+        List<String> listOfElements = new ArrayList<String>();
+        for (ExtendedWebElement oneElement : paragraphTitles){
+            listOfElements.add(oneElement.getText());
+        }
+        return listOfElements;
     }
 
     public List<ParagraphContent> getParagraphContents() {
         return paragraphContents;
     }
-
 }
