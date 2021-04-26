@@ -112,17 +112,16 @@ public class WebArenaTest extends AbstractTest {
         HomePage homePage = loginService.login(user.getEmail(), user.getPassword());
 
         NewsPage newsPage = homePage.getFooterMenu().openNewsPage();
-        Assert.assertEquals(newsPage.getPageTitle(), "News", "\'News\' title isn't detected. News page isn't open");
+        Assert.assertTrue(newsPage.isNewsPageOpen(), "News page isn't open");
 
         NewsPageItem newsItems = newsPage.pickNews(0);
         String titleFromNewsPage = newsItems.getTitle();
 
         ArticlePage articlePage = newsItems.clickNews();
-        Assert.assertEquals(articlePage.getTextFromPostYouCommBtn(), "POST YOUR COMMENT",
-                "\'POST YOUR COMMENT\' button isn't detect. Article page isn't open");
+        Assert.assertTrue(articlePage.isArticlePageOpen(), "Article page isn't open");
         String titleArticlePage = articlePage.getTitle();
 
-        Assert.assertEquals(titleArticlePage, titleFromNewsPage, "Titles isn't match");
+        Assert.assertEquals(titleArticlePage, titleFromNewsPage, "Titles doesn't match");
     }
 
     @Test(description = "07")
@@ -134,7 +133,7 @@ public class WebArenaTest extends AbstractTest {
         HomePage homePage = loginService.login(user.getEmail(), user.getPassword());
 
         NewsPage newsPage = homePage.getFooterMenu().openNewsPage();
-        Assert.assertEquals(newsPage.getPageTitle(), "News", "\'News\' title isn't detect. News page isn't open");
+        Assert.assertTrue(newsPage.isNewsPageOpen(), "News page isn't open");
 
         final String search = "iPhone";
         List<NewsPageItem> searchRes = newsPage.searchNews(search);
