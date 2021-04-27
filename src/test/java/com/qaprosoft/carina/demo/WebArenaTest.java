@@ -1,6 +1,5 @@
 package com.qaprosoft.carina.demo;
 
-import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.demo.gui.components.*;
 import com.qaprosoft.carina.demo.gui.constants.WebConstants;
 import com.qaprosoft.carina.demo.gui.pages.*;
@@ -13,9 +12,7 @@ import com.qaprosoft.carina.core.foundation.AbstractTest;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
 import org.testng.asserts.SoftAssert;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class WebArenaTest extends AbstractTest {
 
@@ -155,7 +152,7 @@ public class WebArenaTest extends AbstractTest {
 
         List<String> titles = glossaryPage.getParagraphTitles();
         List<ParagraphContent> contents = glossaryPage.getParagraphContents();
-        Assert.assertTrue(titles.size()==contents.size(), "Size doesn't match");
+        Assert.assertTrue(titles.size() == contents.size(), "Size doesn't match");
 
         for (int i = 0; i < titles.size(); i++) {
             String title = titles.get(i);
@@ -164,8 +161,7 @@ public class WebArenaTest extends AbstractTest {
                 char itemFirstChar = item.charAt(0);
                 if (title.equals("0 - 9")) {
                     Assert.assertTrue(Character.isDigit(itemFirstChar), "First char isn't digital");
-                }
-                else {
+                } else {
                     Assert.assertEquals(Character.toLowerCase(itemFirstChar), Character.toLowerCase(title.charAt(0)), "First letter of element isn't equal to title");
                 }
             }
@@ -185,11 +181,11 @@ public class WebArenaTest extends AbstractTest {
 
         List<ParagraphContent> paragraphContents = glossaryPage.getParagraphContents();
 
-        for (int paragraphIndex = 0; paragraphIndex < paragraphContents.size(); paragraphIndex++) {
-            List<String> elements = paragraphContents.get(paragraphIndex).getElements();
-            for (int currentElementIndex = 0; currentElementIndex < elements.size()-1; currentElementIndex++) {
-                String currentElement = elements.get(currentElementIndex);
-                String nextElement = elements.get(currentElementIndex + 1);
+        for (int i = 0; i < paragraphContents.size(); i++) {
+            List<String> elements = paragraphContents.get(i).getElements();
+            for (int j = 0; j < elements.size()-1; j++) {
+                String currentElement = elements.get(j);
+                String nextElement = elements.get(j + 1);
                 int res = currentElement.compareToIgnoreCase(nextElement);
                 softAssert.assertTrue(res<0, "Element isn't in alphabetical order: " + currentElement + " + " + nextElement);
             }

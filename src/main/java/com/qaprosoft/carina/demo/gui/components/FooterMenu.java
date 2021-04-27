@@ -25,6 +25,7 @@ import com.qaprosoft.carina.core.gui.AbstractUIObject;
 import com.qaprosoft.carina.demo.gui.pages.CompareModelsPage;
 import com.qaprosoft.carina.demo.gui.pages.HomePage;
 import com.qaprosoft.carina.demo.gui.pages.NewsPage;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class FooterMenu extends AbstractUIObject {
     @FindBy(linkText = "Home")
@@ -59,7 +60,7 @@ public class FooterMenu extends AbstractUIObject {
     }
 
     public GlossaryPage openGlossaryPage() {
-        glossaryLink.isPresent();
+        waitUntil(ExpectedConditions.presenceOfElementLocated(glossaryLink.getBy()), 2);
         glossaryLink.click();
         return new GlossaryPage(driver);
     }
