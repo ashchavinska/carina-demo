@@ -2,9 +2,7 @@ package com.qaprosoft.carina.demo;
 
 import com.qaprosoft.carina.demo.gui.components.*;
 import com.qaprosoft.carina.demo.gui.constants.WebConstants;
-import com.qaprosoft.carina.demo.gui.pages.ArticlePage;
-import com.qaprosoft.carina.demo.gui.pages.LoginPage;
-import com.qaprosoft.carina.demo.gui.pages.NewsPage;
+import com.qaprosoft.carina.demo.gui.pages.*;
 import com.qaprosoft.carina.demo.gui.services.LoginService;
 import com.qaprosoft.carina.demo.gui.services.UserService;
 import org.testng.Assert;
@@ -12,7 +10,6 @@ import org.testng.annotations.Test;
 
 import com.qaprosoft.carina.core.foundation.AbstractTest;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
-import com.qaprosoft.carina.demo.gui.pages.HomePage;
 import org.testng.asserts.SoftAssert;
 
 import java.util.List;
@@ -141,5 +138,58 @@ public class WebArenaTest extends AbstractTest {
         for (NewsPageItem item : searchRes) {
             Assert.assertTrue(item.getTitle().toLowerCase().contains(search.toLowerCase()), "Search result is not as required");
         }
+    }
+
+    @Test(description = "08")
+    @MethodOwner(owner = "ashchavinska")
+    public void verifyGlossaryParagraphHeaderAndTextByFirstLetter() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        Assert.assertTrue(homePage.isPageOpened(), "Home page isn't open");
+
+        GlossaryPage glossaryPage = homePage.getFooterMenu().openGlossaryPage();
+        Assert.assertTrue(glossaryPage.isGlossaryPageOpen(), "Glossary page isn't open");
+
+        List<String> titles = glossaryPage.getParagraphTitles();
+        List<ParagraphContent> contents = glossaryPage.getParagraphContents();
+        Assert.assertTrue(titles.size() == contents.size(), "Size doesn't match");
+
+        for (int i = 0; i < titles.size(); i++) {
+            String title = titles.get(i);
+            List<String> content = contents.get(i).getElements();
+            for (String item : content) {
+                char itemFirstChar = item.charAt(0);
+                if (title.equals("0 - 9")) {
+                    Assert.assertTrue(Character.isDigit(itemFirstChar), "First char isn't digital");
+                } else {
+                    Assert.assertEquals(Character.toLowerCase(itemFirstChar), Character.toLowerCase(title.charAt(0)), "First letter of element isn't equal to title");
+                }
+            }
+        }
+    }
+
+    @Test(description = "09")
+    @MethodOwner(owner = "ashchavinska")
+    public void verifyGlossaryParagraphTextByAlphabet() {
+        SoftAssert softAssert = new SoftAssert();
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        Assert.assertTrue(homePage.isPageOpened(), "Home page isn't open");
+
+        GlossaryPage glossaryPage = homePage.getFooterMenu().openGlossaryPage();
+        Assert.assertTrue(glossaryPage.isGlossaryPageOpen(), "Glossary page isn't open");
+
+        List<ParagraphContent> paragraphContents = glossaryPage.getParagraphContents();
+
+        for (int i = 0; i < paragraphContents.size(); i++) {
+            List<String> elements = paragraphContents.get(i).getElements();
+            for (int j = 0; j < elements.size()-1; j++) {
+                String currentElement = elements.get(j);
+                String nextElement = elements.get(j + 1);
+                int res = currentElement.compareToIgnoreCase(nextElement);
+                softAssert.assertTrue(res<0, "Element isn't in alphabetical order: " + currentElement + " + " + nextElement);
+            }
+        }
+        softAssert.assertAll();
     }
 }
