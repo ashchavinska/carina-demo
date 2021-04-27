@@ -163,10 +163,10 @@ public class WebArenaTest extends AbstractTest {
             for (String item : content) {
                 char itemFirstChar = item.charAt(0);
                 if (title.equals("0 - 9")) {
-                    Assert.assertTrue(Character.isDigit(itemFirstChar), "First char doesn't match");
+                    Assert.assertTrue(Character.isDigit(itemFirstChar), "First char isn't digital");
                 }
                 else {
-                    Assert.assertEquals(Character.toLowerCase(itemFirstChar), Character.toLowerCase(title.charAt(0)), "First char doesn't match");
+                    Assert.assertEquals(Character.toLowerCase(itemFirstChar), Character.toLowerCase(title.charAt(0)), "First letter of element isn't equal to title");
                 }
             }
         }
