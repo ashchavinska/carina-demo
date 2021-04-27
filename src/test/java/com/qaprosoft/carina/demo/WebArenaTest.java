@@ -171,4 +171,29 @@ public class WebArenaTest extends AbstractTest {
             }
         }
     }
+
+    @Test(description = "09")
+    @MethodOwner(owner = "ashchavinska")
+    public void verifyGlossaryParagraphTextByAlphabet() {
+        SoftAssert softAssert = new SoftAssert();
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        Assert.assertTrue(homePage.isPageOpened(), "Home page isn't open");
+
+        GlossaryPage glossaryPage = homePage.getFooterMenu().openGlossaryPage();
+        Assert.assertTrue(glossaryPage.isGlossaryPageOpen(), "Glossary page isn't open");
+
+        List<ParagraphContent> paragraphContents = glossaryPage.getParagraphContents();
+
+        for (int paragraphIndex = 0; paragraphIndex < paragraphContents.size(); paragraphIndex++) {
+            List<String> elements = paragraphContents.get(paragraphIndex).getElements();
+            for (int currentElementIndex = 0; currentElementIndex < elements.size()-1; currentElementIndex++) {
+                String currentElement = elements.get(currentElementIndex);
+                String nextElement = elements.get(currentElementIndex + 1);
+                int res = currentElement.compareToIgnoreCase(nextElement);
+                softAssert.assertTrue(res<0, "Element isn't in alphabetical order: " + currentElement + " + " + nextElement);
+            }
+        }
+        softAssert.assertAll();
+    }
 }
