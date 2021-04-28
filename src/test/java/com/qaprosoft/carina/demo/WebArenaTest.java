@@ -6,6 +6,7 @@ import com.qaprosoft.carina.demo.gui.pages.*;
 import com.qaprosoft.carina.demo.gui.services.LoginService;
 import com.qaprosoft.carina.demo.gui.services.UserService;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.qaprosoft.carina.core.foundation.AbstractTest;
@@ -123,7 +124,8 @@ public class WebArenaTest extends AbstractTest {
 
     @Test(description = "07")
     @MethodOwner(owner = "ashchavinska")
-    public void verifySearchingProcess() {
+    @Parameters({ "searchKeyword" })
+    public void verifySearchingProcess(String search) {
         UserService userService = new UserService();
         User user = userService.getUser();
         LoginService loginService = new LoginService();
@@ -132,7 +134,6 @@ public class WebArenaTest extends AbstractTest {
         NewsPage newsPage = homePage.getFooterMenu().openNewsPage();
         Assert.assertTrue(newsPage.isNewsPageOpen(), "News page isn't open");
 
-        final String search = "iPhone";
         List<NewsPageItem> searchRes = newsPage.searchNews(search);
         Assert.assertFalse(searchRes.isEmpty(), "Search result is fail");
         for (NewsPageItem item : searchRes) {
