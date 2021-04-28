@@ -1,43 +1,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Web tests (Chrome)" verbose="1" parallel="methods">
 
-    <test name="Search iPhone">
-        <parameter name="searchKeyword" value="iPhone"/>
-        <classes>
-            <class name="com.qaprosoft.carina.demo.WebArenaTest" >
-                <methods>
-                    <include name="verifySearchingProcess"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="Search Xiaomi">
-        <parameter name="searchKeyword" value="Xiaomi"/>
-        <classes>
-            <class name="com.qaprosoft.carina.demo.WebArenaTest" >
-                <methods>
-                    <include name="verifySearchingProcess"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="Search Samsung">
-        <parameter name="searchKeyword" value="Samsung"/>
-        <classes>
-            <class name="com.qaprosoft.carina.demo.WebArenaTest" >
-                <methods>
-                    <include name="verifySearchingProcess"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
     <test name="Web login test">
         <classes>
             <class name="com.qaprosoft.carina.demo.WebArenaTest" >
                 <methods>
+                    <include name="verifySearchingProcess"/>
                     <include name="verifyHeaderComponents"/>
                     <include name="verifySuccessLogin"/>
                     <include name="verifyLoginWithWrongEmail"/>
