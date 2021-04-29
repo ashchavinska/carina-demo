@@ -1,18 +1,19 @@
 package com.qaprosoft.carina.demo;
 
+import com.qaprosoft.carina.core.foundation.dataprovider.annotations.CsvDataSourceParameters;
 import com.qaprosoft.carina.demo.gui.components.*;
 import com.qaprosoft.carina.demo.gui.constants.WebConstants;
 import com.qaprosoft.carina.demo.gui.pages.*;
 import com.qaprosoft.carina.demo.gui.services.LoginService;
 import com.qaprosoft.carina.demo.gui.services.UserService;
 import org.testng.Assert;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.qaprosoft.carina.core.foundation.AbstractTest;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
 import org.testng.asserts.SoftAssert;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class WebArenaTest extends AbstractTest {
@@ -122,10 +123,10 @@ public class WebArenaTest extends AbstractTest {
         Assert.assertEquals(titleArticlePage, titleFromNewsPage, "Titles doesn't match");
     }
 
-    @Test(description = "07")
+    @Test(description = "07", dataProvider = "DataProvider")
     @MethodOwner(owner = "ashchavinska")
-    @Parameters({ "searchKeyword" })
-    public void verifySearchingProcess(String search) {
+    @CsvDataSourceParameters(path = "csv/searchKeyword.csv", dsUid = "TUID")
+    public void verifySearchingProcess(HashMap<String, String> elementToSearch) {
         UserService userService = new UserService();
         User user = userService.getUser();
         LoginService loginService = new LoginService();
@@ -134,10 +135,10 @@ public class WebArenaTest extends AbstractTest {
         NewsPage newsPage = homePage.getFooterMenu().openNewsPage();
         Assert.assertTrue(newsPage.isNewsPageOpen(), "News page isn't open");
 
-        List<NewsPageItem> searchRes = newsPage.searchNews(search);
+        List<NewsPageItem> searchRes = newsPage.searchNews(elementToSearch.get("searchKeyword"));
         Assert.assertFalse(searchRes.isEmpty(), "Search result is fail");
         for (NewsPageItem item : searchRes) {
-            Assert.assertTrue(item.getTitle().toLowerCase().contains(search.toLowerCase()), "Search result is not as required");
+            Assert.assertTrue(item.getTitle().toLowerCase().contains(elementToSearch.get("searchKeyword").toLowerCase()), "Search result is not as required");
         }
     }
 

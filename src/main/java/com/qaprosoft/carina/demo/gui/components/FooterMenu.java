@@ -55,6 +55,7 @@ public class FooterMenu extends AbstractUIObject {
     }
     
     public NewsPage openNewsPage() {
+        waitUntil(ExpectedConditions.presenceOfElementLocated(newsLink.getBy()), 2);
         newsLink.click();
         return new NewsPage(driver);
     }
