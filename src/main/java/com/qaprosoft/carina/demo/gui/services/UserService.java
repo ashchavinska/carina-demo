@@ -5,7 +5,7 @@ import org.apache.log4j.Logger;
 
 public class UserService {
 
-    private static final Logger LOGGER = Logger.getLogger(LoginService.class);
+    private static final Logger LOGGER = Logger.getLogger(UserService.class);
 
     public User getUser() {
         LOGGER.info("Get user.");
