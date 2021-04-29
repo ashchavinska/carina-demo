@@ -3,10 +3,13 @@ package com.qaprosoft.carina.demo.gui.components;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
 import com.qaprosoft.carina.demo.gui.pages.LoginPage;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginField extends AbstractUIObject {
+
+    private static final Logger LOGGER = Logger.getLogger(LoginField.class);
 
     @FindBy(id = "login-popup2")
     private ExtendedWebElement loginField;
@@ -25,6 +28,7 @@ public class LoginField extends AbstractUIObject {
     }
 
     public boolean isLoginFieldPresent(){
+        LOGGER.info("Check is login field present.");
         return loginField.isPresent();
     }
 

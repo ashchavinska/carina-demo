@@ -16,6 +16,7 @@
 package com.qaprosoft.carina.demo.gui.components;
 
 import com.qaprosoft.carina.demo.gui.pages.ArticlePage;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -25,6 +26,8 @@ import com.qaprosoft.carina.core.gui.AbstractUIObject;
 
 public class NewsPageItem extends AbstractUIObject {
 
+    private static final Logger LOGGER = Logger.getLogger(NewsPageItem.class);
+
     @FindBy(xpath="./a/h3")
     public ExtendedWebElement titleLink;
     
@@ -33,6 +36,7 @@ public class NewsPageItem extends AbstractUIObject {
     }
     
     public String getTitle() {
+        LOGGER.info("Get text: " + "[ " +  titleLink.getElement().getText() + " ]" + " - from news page item.");
         return titleLink.getElement().getText();
     }
 

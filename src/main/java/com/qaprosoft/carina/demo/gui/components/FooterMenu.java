@@ -28,6 +28,7 @@ import com.qaprosoft.carina.demo.gui.pages.NewsPage;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class FooterMenu extends AbstractUIObject {
+
     @FindBy(linkText = "Home")
     private ExtendedWebElement homeLink;
 
