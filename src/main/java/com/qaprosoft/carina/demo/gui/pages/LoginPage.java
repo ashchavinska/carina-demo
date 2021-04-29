@@ -21,12 +21,12 @@ public class LoginPage extends AbstractPage {
     }
 
     public String getLoginStatus() {
-        LOGGER.info("Get login status.");
+        LOGGER.info("Get login status - " + "[ " + loginResult.getText() + " ]");
         return loginResult.getText();
     }
 
     public String loginFailReason(){
-        LOGGER.info("Get login fail reason.");
+        LOGGER.info("Get login fail reason - " + "[ " + loginFailReason.getText() + " ]");
         return loginFailReason.getText();
     }
 }

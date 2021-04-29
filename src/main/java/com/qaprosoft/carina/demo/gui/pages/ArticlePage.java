@@ -21,7 +21,7 @@ public class ArticlePage extends AbstractPage {
     }
 
     public String getTitle() {
-        LOGGER.info("Get title of article page.");
+        LOGGER.info("Get title of article page - " + "[ " + title.getText() + " ]");
         return title.getText();
     }
 

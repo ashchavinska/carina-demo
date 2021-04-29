@@ -54,7 +54,7 @@ public class NewsPage extends AbstractPage {
     }
 
     public NewsPageItem pickNews(Integer index){
-        LOGGER.info("Get news by index.");
+        LOGGER.info("Get news by index[" + index + "]");
         return news.get(index);
     }
 

@@ -36,7 +36,7 @@ public class NewsPageItem extends AbstractUIObject {
     }
     
     public String getTitle() {
-        LOGGER.info("Get text from news page item.");
+        LOGGER.info("Get text: " + "[ " +  titleLink.getElement().getText() + " ]" + " - from news page item.");
         return titleLink.getElement().getText();
     }
 

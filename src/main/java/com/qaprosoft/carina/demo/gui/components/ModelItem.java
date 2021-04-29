@@ -39,7 +39,7 @@ public class ModelItem extends AbstractUIObject {
     }
 
     public String readModel() {
-        LOGGER.info("Get text from model label.");
+        LOGGER.info("Get text: " +  "[ " + modelLabel.getText() + " ]" + " - from model label.");
         return modelLabel.getText();
     }
 
