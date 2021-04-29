@@ -85,6 +85,7 @@ public class Header extends AbstractUIObject {
     public boolean isRssIconPresent() {
         return rssIcon.isPresent();
     }
+
     public boolean isLoginIconPresent() {
         return loginIcon.isPresent();
     }

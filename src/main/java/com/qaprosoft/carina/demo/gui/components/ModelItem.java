@@ -15,6 +15,7 @@
  */
 package com.qaprosoft.carina.demo.gui.components;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -24,6 +25,9 @@ import com.qaprosoft.carina.core.gui.AbstractUIObject;
 import com.qaprosoft.carina.demo.gui.pages.ModelInfoPage;
 
 public class ModelItem extends AbstractUIObject {
+
+    private static final Logger LOGGER = Logger.getLogger(ModelItem.class);
+
     @FindBy(xpath = ".//strong/span")
     private ExtendedWebElement modelLabel;
 
@@ -35,6 +39,7 @@ public class ModelItem extends AbstractUIObject {
     }
 
     public String readModel() {
+        LOGGER.info("Get text from model label.");
         return modelLabel.getText();
     }
 
