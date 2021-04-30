@@ -11,7 +11,10 @@ import com.qaprosoft.carina.core.gui.AbstractUIObject;
 public class Header extends AbstractUIObject {
 
     @FindBy(xpath = "//button[contains(@aria-label,'Toggle Navigation')]")
-    private ExtendedWebElement burgerMenu;
+    private BurgerMenu burgerMenu;
+
+    @FindBy(xpath = "//button[contains(@aria-label,'Toggle Navigation')]")
+    private ExtendedWebElement burgerMenuBtn;
 
     @FindBy(id = "logo")
     private ExtendedWebElement homeTitle;
@@ -51,7 +54,7 @@ public class Header extends AbstractUIObject {
     }
 
     public boolean isBurgerMenuPresent() {
-        return burgerMenu.isPresent();
+        return burgerMenuBtn.isPresent();
     }
 
     public boolean isLogoPresent() {
@@ -101,5 +104,10 @@ public class Header extends AbstractUIObject {
 
     public boolean isLogOutIconPresent() {
         return logOutIcon.isPresent();
+    }
+
+    public BurgerMenu openBurgerMenu() {
+        burgerMenuBtn.click();
+        return burgerMenu;
     }
 }
