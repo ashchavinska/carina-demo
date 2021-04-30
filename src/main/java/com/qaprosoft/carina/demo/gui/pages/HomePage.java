@@ -33,6 +33,7 @@ import com.qaprosoft.carina.demo.gui.components.WeValuePrivacyAd;
 
 
 public class HomePage extends AbstractPage {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     
     @FindBy(id = "footmenu")
@@ -50,6 +51,11 @@ public class HomePage extends AbstractPage {
     @FindBy(id = "header")
     private Header headerMenu;
 
+    @FindBy(xpath = "//div[@class='brandmenu-v2 light l-box clearfix']")
+    private ExtendedWebElement phoneFinderBox;
+
+    @FindBy(xpath = "//a[@class='pad-single pad-finder']")
+    private ExtendedWebElement phoneFinderBtnInBox;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -84,5 +90,15 @@ public class HomePage extends AbstractPage {
 
     public Header getHeader() {
         return headerMenu;
+    }
+
+    public boolean isPhoneFinderBoxPresent() {
+        return phoneFinderBox.isPresent();
+    }
+
+    public PhoneFinderPage openPhoneFinderPage() {
+        LOGGER.info("Click phone finder button in box.");
+        phoneFinderBtnInBox.click();
+        return new PhoneFinderPage(driver);
     }
 }

@@ -13,6 +13,8 @@
                     <include name="verifyArticleName"/>
                     <include name="verifyGlossaryParagraphHeaderAndTextByFirstLetter"/>
                     <include name="verifyGlossaryParagraphTextByAlphabet"/>
+                    <include name="verifyBurgerMenuInHeader"/>
+                    <include name="verifyPhoneFinder"/>
                 </methods>
             </class>
         </classes>
