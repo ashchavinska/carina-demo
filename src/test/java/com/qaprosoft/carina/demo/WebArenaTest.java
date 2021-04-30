@@ -238,4 +238,44 @@ public class WebArenaTest extends AbstractTest {
 
         softAssert.assertAll();
     }
+
+    @Test(description = "11", dataProvider = "DataProvider")
+    @MethodOwner(owner = "ashchavinska")
+    @CsvDataSourceParameters(path = "csv/searchPhoneModel.csv", dsUid = "TUID")
+    public void verifyPhoneFinder(HashMap<String, String> elementToSearch) {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        Assert.assertTrue(homePage.isPageOpened(), "Home page isn't open");
+        Assert.assertTrue(homePage.isPhoneFinderBoxPresent(), "Phone finder box isn't present");
+
+        PhoneFinderPage phoneFinderPage = homePage.openPhoneFinderPage();
+        Assert.assertTrue(phoneFinderPage.isPhoneFinderPageOpen(), "Phone finder page isn't open");
+
+        phoneFinderPage.searchAndSelect(elementToSearch.get("searchKeyword"));
+        String showBtnText = phoneFinderPage.getShowBtnText();
+        Assert.assertTrue(showBtnText.contains("result"), "Show button isn't contain \"result\" text");
+
+        PhoneFinderResultPage phoneFinderResultPage = phoneFinderPage.clickShowBtn();
+        Assert.assertTrue(phoneFinderResultPage.isPhoneFinderResultPageOpen(), "Phone finder result page isn't open");
+
+        String resultText = phoneFinderResultPage.getResultText();
+        Assert.assertTrue(resultText.contains(showBtnText), "Result text doesn't contains " + showBtnText);
+
+        String TextClickHereBtn = phoneFinderResultPage.getTextClickHereBtn();
+        Assert.assertTrue(resultText.contains(TextClickHereBtn), "Result text doesn't contains " + TextClickHereBtn);
+
+        Assert.assertTrue(phoneFinderResultPage.isClickHereBtnPresent(), "Click here button isn't present");
+
+        List<ModelItem> listOfModelItems = phoneFinderResultPage.getListModelItem();
+        Assert.assertFalse(listOfModelItems.isEmpty(), "Search result is empty");
+        for (ModelItem item : listOfModelItems) {
+            Assert.assertTrue(item.readModel().toLowerCase().contains(elementToSearch.get("searchKeyword").toLowerCase()), "Search result is not as required");
+        }
+
+        Assert.assertTrue(phoneFinderResultPage.isTextInBottomPresent(), "Text in bottom isn't present");
+
+        phoneFinderPage = phoneFinderResultPage.clickClickHereBtn();
+        Assert.assertTrue(phoneFinderPage.isPhoneFinderPageOpen(), "Phone finder page isn't open");
+        Assert.assertEquals(phoneFinderPage.getSelectedBrand().toLowerCase(), elementToSearch.get("searchKeyword").toLowerCase(), "ghj" );
+    }
 }
