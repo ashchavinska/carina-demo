@@ -274,7 +274,8 @@ public class WebArenaTest extends AbstractTest {
 
         Assert.assertTrue(phoneFinderResultPage.isTextInBottomPresent(), "Text in bottom isn't present");
 
-        PhoneFinderPage refiningPhoneFinderPage = phoneFinderResultPage.clickClickHereBtn();
-        Assert.assertEquals(refiningPhoneFinderPage.getSelectedBrand().toLowerCase(), elementToSearch.get("searchKeyword").toLowerCase(), "ghj" );
+        phoneFinderPage = phoneFinderResultPage.clickClickHereBtn();
+        Assert.assertTrue(phoneFinderPage.isPhoneFinderPageOpen(), "Phone finder page isn't open");
+        Assert.assertEquals(phoneFinderPage.getSelectedBrand().toLowerCase(), elementToSearch.get("searchKeyword").toLowerCase(), "ghj" );
     }
 }
