@@ -194,4 +194,48 @@ public class WebArenaTest extends AbstractTest {
         }
         softAssert.assertAll();
     }
+
+    @Test(description = "10")
+    @MethodOwner(owner = "ashchavinska")
+    public void verifyBurgerMenuInHeader() {
+        SoftAssert softAssert = new SoftAssert();
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        Assert.assertTrue(homePage.isPageOpened(), "Home page isn't open");
+
+        BurgerMenu burgerMenu = homePage.getHeader().openBurgerMenu();
+        Assert.assertTrue(burgerMenu.isBurgerMenuOpen(), "Burger page isn't open");
+
+        HomePage homePageFromBurger = burgerMenu.openHomePage();
+        softAssert.assertTrue(homePageFromBurger.isPageOpened(), "Home page isn't open");
+
+        NewsPage newsPage = burgerMenu.openNewsPage();
+        softAssert.assertTrue(newsPage.isNewsPageOpen(), "News page isn't open");
+
+        ReviewsPage reviewsPage = burgerMenu.openReviewsPage();
+        softAssert.assertTrue(reviewsPage.isReviewsPageOpen(), "Reviews page isn't open");
+
+        VideosPage videosPage = burgerMenu.openVideosPage();
+        softAssert.assertTrue(videosPage.isVideosPageOpen(), "Videos page isn't open");
+
+        FeaturedPage featuredPage = burgerMenu.openFeaturedPage();
+        softAssert.assertTrue(featuredPage.isFeaturedPageOpen(), "Featured page isn't open");
+
+        PhoneFinderPage phoneFinderPage = burgerMenu.openPhoneFinderPage();
+        softAssert.assertTrue(phoneFinderPage.isPhoneFinderPageOpen(), "Phone Finder page isn't open");
+
+        DealsPage dealsPage = burgerMenu.openDealsPage();
+        softAssert.assertTrue(dealsPage.isDealsPageOpen(), "Deals page isn't open");
+
+        ToolsPage toolsPage = burgerMenu.openToolsPage();
+        softAssert.assertTrue(toolsPage.isToolsPageOpen(), "Tools page isn't open");
+
+        CoveragePage coveragePage = burgerMenu.openCoveragePage();
+        softAssert.assertTrue(coveragePage.isCoveragePageOpen(), "Coverage page isn't open");
+
+        ContactPage contactPage = burgerMenu.openContactPage();
+        softAssert.assertTrue(contactPage.isContactPageOpen(), "Contact page isn't open");
+
+        softAssert.assertAll();
+    }
 }
