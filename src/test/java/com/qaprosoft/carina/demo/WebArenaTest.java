@@ -294,8 +294,7 @@ public class WebArenaTest extends AbstractTest {
 
         //2 - select Apple brand on phone finder box -> page with Apple phones is opened
         String search = elementToSearch.get("brandName");
-        BrandModelsPage brandPage = homePage.getBrandPageFromPhoneFinderBox(search);
-        Assert.assertNotNull(brandPage, "Method getBrandPageFromPhoneFinderBox() returned \"null\"");
+        BrandModelsPage brandPage = homePage.openBrandPageByName(search);
         Assert.assertTrue(brandPage.isBrandModelsPageOpen(search), String.format("%s brand page isn't open", search));
 
         //3 - select popularity tab

@@ -48,6 +48,9 @@ public class HomePage extends AbstractPage {
     @FindBy(id = "header")
     private ExtendedWebElement header;
 
+    @FindBy(xpath = "//div[@class='brandmenu-v2 light l-box clearfix']/ul/li[contains(text(),\"%s\")]")
+    private ExtendedWebElement brandFromBox;
+
     @FindBy(id = "header")
     private Header headerMenu;
 
@@ -105,13 +108,8 @@ public class HomePage extends AbstractPage {
         return new PhoneFinderPage(driver);
     }
 
-    public BrandModelsPage getBrandPageFromPhoneFinderBox(String brand){
-        for (ExtendedWebElement brandFromBox : listOfBrandsOfPhoneFinderBox) {
-            if (brandFromBox.getText().equalsIgnoreCase(brand)) {
-                brandFromBox.click();
-                return new BrandModelsPage(driver);
-            }
-        }
-        return null;
+    public BrandModelsPage openBrandPageByName(String brand) {
+        brandFromBox.format(brand).click();
+        return new BrandModelsPage(driver);
     }
 }
