@@ -2,11 +2,11 @@ package com.qaprosoft.carina.demo.gui.pages;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
-import com.qaprosoft.carina.demo.gui.components.ModelItem;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -78,7 +78,7 @@ public class UserOpinionsPage extends AbstractPage {
             try {
                 Date date = dateFormat.parse(stringDate);
                 listOfDate.add(date);
-            }catch (Exception e) {
+            }catch (ParseException e) {
                 e.printStackTrace();
             }
         }
