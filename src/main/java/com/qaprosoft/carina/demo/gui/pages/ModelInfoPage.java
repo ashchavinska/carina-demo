@@ -15,6 +15,7 @@
  */
 package com.qaprosoft.carina.demo.gui.pages;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -22,6 +23,15 @@ import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebEleme
 import com.qaprosoft.carina.core.gui.AbstractPage;
 
 public class ModelInfoPage extends AbstractPage {
+
+    private static final Logger LOGGER = Logger.getLogger(ModelInfoPage.class);
+
+    @FindBy(xpath = "//h1[@class='specs-phone-name-title']")
+    private ExtendedWebElement pageTitle;
+
+    @FindBy(xpath = "//i[@class='head-icon icon-comment-count']")
+    private ExtendedWebElement opinionsBtn;
+
     @FindBy(css = ".help-display strong")
     private ExtendedWebElement displayInfoLabel;
 
@@ -56,5 +66,15 @@ public class ModelInfoPage extends AbstractPage {
     public String readBattery() {
         assertElementPresent(displayInfoLabel);
         return batteryInfoLabel.getText();
+    }
+
+    public String getPageTitle(){
+        LOGGER.info("Get page title - " + "[ " + pageTitle.getText() + " ]");
+        return pageTitle.getText();
+    }
+
+    public UserOpinionsPage openOpinionsPage(){
+        opinionsBtn.click();
+        return new UserOpinionsPage(driver);
     }
 }
