@@ -13,6 +13,7 @@ import com.qaprosoft.carina.core.foundation.AbstractTest;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
 import org.testng.asserts.SoftAssert;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -277,5 +278,73 @@ public class WebArenaTest extends AbstractTest {
         phoneFinderPage = phoneFinderResultPage.clickClickHereBtn();
         Assert.assertTrue(phoneFinderPage.isPhoneFinderPageOpen(), "Phone finder page isn't open");
         Assert.assertEquals(phoneFinderPage.getSelectedBrand().toLowerCase(), elementToSearch.get("searchKeyword").toLowerCase(), "ghj" );
+    }
+
+    @Test(description = "12", dataProvider = "DataProvider")
+    @MethodOwner(owner = "ashchavinska")
+    @CsvDataSourceParameters(path = "csv/searchKeywordForOpinionTest.csv", dsUid = "TUID")
+    public void verifyOpinionsOnPhonePage(HashMap<String, String> elementToSearch) {
+        SoftAssert softAssert = new SoftAssert();
+
+        //1 - open site and login
+        UserService userService = new UserService();
+        User user = userService.getUser();
+        LoginService loginService = new LoginService();
+        HomePage homePage = loginService.login(user.getEmail(), user.getPassword());
+
+        //2 - select Apple brand on phone finder box -> page with Apple phones is opened
+        String search = elementToSearch.get("brandName");
+        BrandModelsPage brandPage = homePage.openBrandPageByName(search);
+        Assert.assertTrue(brandPage.isBrandModelsPageOpen(search), String.format("%s brand page isn't open", search));
+
+        //3 - select popularity tab
+        brandPage.clickPopularityBtn();
+        Assert.assertTrue(brandPage.isPopularityActive(), "Popularity button isn't active");
+
+        //4 - select first phone -> page with this phone is opened
+        int modelIndex = Integer.parseInt(elementToSearch.get("modelIndex"));
+        String modelName = brandPage.getModelNameByIndex(modelIndex);
+        ModelInfoPage modelPage = brandPage.selectElement(modelIndex);
+        Assert.assertTrue(modelPage.getPageTitle().contains(modelName), "Model page title doesn't match with title of selected element");
+
+        //5 - open opinions tab
+        UserOpinionsPage userOpinionsPage = modelPage.openOpinionsPage();
+        Assert.assertTrue(userOpinionsPage.isUserOpinionsPageOpen(), "User opinions page isn't open");
+
+        //6 - sort by 'Best rating' -> opinions is sorted
+        userOpinionsPage.selectSortBestRating();
+        List<String> listOfScores = userOpinionsPage.getListOfCommentsScores();
+
+        for (int i = 0; i < listOfScores.size()-1; i++) {
+            int currentScore = Integer.parseInt(listOfScores.get(i));
+            int nextScore = Integer.parseInt(listOfScores.get(i + 1));
+            softAssert.assertTrue(currentScore >= nextScore, "Scores isn't in correct order: " + currentScore + " + " + nextScore);
+        }
+
+        //7 - rate some comment -> comment is rated
+        int scoreIndex = Integer.parseInt(elementToSearch.get("scoreIndex"));
+        int scoreBeforeRate = Integer.parseInt(listOfScores.get(scoreIndex));
+        userOpinionsPage.rateCommentByIndex(scoreIndex);
+        List<String> listOfRatedScores = userOpinionsPage.getListOfCommentsScores();
+        int scoreAfterRate = Integer.parseInt(listOfRatedScores.get(scoreIndex));
+        Assert.assertTrue(scoreBeforeRate<scoreAfterRate, "Comment wasn't rated");
+
+        //8 - unrate the same comment -> comment is unrated
+        userOpinionsPage.unRateCommentByIndex(scoreIndex);
+        List<String> listOfScoresUnRated = userOpinionsPage.getListOfCommentsScores();
+        int unRatedScore = Integer.parseInt(listOfScoresUnRated.get(scoreIndex));
+        Assert.assertTrue(scoreBeforeRate==unRatedScore, "Comment unrated");
+
+        //9 - sort by 'Newest first' -> opinions is sorted
+        userOpinionsPage.selectSortNewestFirst();
+        List<Date> listOfCommentsDate =userOpinionsPage.getListOfCommentsDate();
+
+        for (int i = 0; i < listOfCommentsDate.size()-1; i++) {
+            Date date = listOfCommentsDate.get(i);
+            Date nextDate = listOfCommentsDate.get(i + 1);
+            int res = date.compareTo(nextDate);
+            softAssert.assertTrue(res >= 0, "Date isn't in correct order: " + date + " + " + nextDate);
+        }
+        softAssert.assertAll();
     }
 }

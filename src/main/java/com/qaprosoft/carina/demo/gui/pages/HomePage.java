@@ -48,11 +48,17 @@ public class HomePage extends AbstractPage {
     @FindBy(id = "header")
     private ExtendedWebElement header;
 
+    @FindBy(xpath = "//div[@class='brandmenu-v2 light l-box clearfix']/ul/li[contains(text(),\"%s\")]")
+    private ExtendedWebElement brandFromBox;
+
     @FindBy(id = "header")
     private Header headerMenu;
 
     @FindBy(xpath = "//div[@class='brandmenu-v2 light l-box clearfix']")
     private ExtendedWebElement phoneFinderBox;
+
+    @FindBy(xpath = "//div[@class='brandmenu-v2 light l-box clearfix']/ul/li")
+    private List<ExtendedWebElement> listOfBrandsOfPhoneFinderBox;
 
     @FindBy(xpath = "//a[@class='pad-single pad-finder']")
     private ExtendedWebElement phoneFinderBtnInBox;
@@ -100,5 +106,10 @@ public class HomePage extends AbstractPage {
         LOGGER.info("Click phone finder button in box.");
         phoneFinderBtnInBox.click();
         return new PhoneFinderPage(driver);
+    }
+
+    public BrandModelsPage openBrandPageByName(String brand) {
+        brandFromBox.format(brand).click();
+        return new BrandModelsPage(driver);
     }
 }
