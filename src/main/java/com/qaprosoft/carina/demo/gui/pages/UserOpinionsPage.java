@@ -78,7 +78,7 @@ public class UserOpinionsPage extends AbstractPage {
             try {
                 Date date = dateFormat.parse(stringDate);
                 listOfDate.add(date);
-            }catch (ParseException e) {
+            } catch (ParseException e) {
                 e.printStackTrace();
             }
         }
