@@ -72,8 +72,8 @@ public class UserOpinionsPage extends AbstractPage {
 
     public List<Date> getListOfCommentsDate() {
         List<Date> listOfDate = new ArrayList<Date>();
-        for (ExtendedWebElement score : listOfCommentsDate) {
-            String stringDate = score.getText();
+        for (ExtendedWebElement commentDate : listOfCommentsDate) {
+            String stringDate = commentDate.getText();
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
             try {
                 Date date = dateFormat.parse(stringDate);
