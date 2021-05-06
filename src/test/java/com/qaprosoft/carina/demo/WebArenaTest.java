@@ -333,11 +333,11 @@ public class WebArenaTest extends AbstractTest {
         userOpinionsPage.unRateCommentByIndex(scoreIndex);
         List<String> listOfScoresUnRated = userOpinionsPage.getListOfCommentsScores();
         int unRatedScore = Integer.parseInt(listOfScoresUnRated.get(scoreIndex));
-        Assert.assertTrue(scoreBeforeRate==unRatedScore, "Comment unrated");
+        Assert.assertTrue(scoreBeforeRate == unRatedScore, "Comment unrated");
 
         //9 - sort by 'Newest first' -> opinions is sorted
         userOpinionsPage.selectSortNewestFirst();
-        List<Date> listOfCommentsDate =userOpinionsPage.getListOfCommentsDate();
+        List<Date> listOfCommentsDate = userOpinionsPage.getListOfCommentsDate();
 
         for (int i = 0; i < listOfCommentsDate.size()-1; i++) {
             Date date = listOfCommentsDate.get(i);
