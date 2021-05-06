@@ -48,7 +48,7 @@ public class HomePage extends AbstractPage {
     @FindBy(id = "header")
     private ExtendedWebElement header;
 
-    @FindBy(xpath = "//div[@class='brandmenu-v2 light l-box clearfix']/ul/li[contains(text(),\"%s\")]")
+    @FindBy(xpath = "//div[@class='brandmenu-v2 light l-box clearfix']/ul/li/a[contains(text(),\"%s\")]")
     private ExtendedWebElement brandFromBox;
 
     @FindBy(id = "header")
