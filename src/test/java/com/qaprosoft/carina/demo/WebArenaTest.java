@@ -136,11 +136,10 @@ public class WebArenaTest extends AbstractTest {
         NewsPage newsPage = homePage.getFooterMenu().openNewsPage();
         Assert.assertTrue(newsPage.isNewsPageOpen(), "News page isn't open");
 
-        List<NewsPageItem> searchRes = newsPage.searchNews(elementToSearch.get("searchKeyword"));
+        String searchBrand = elementToSearch.get("searchKeyword").toLowerCase();
+        List<NewsPageItem> searchRes = newsPage.searchNews(searchBrand);
         Assert.assertFalse(searchRes.isEmpty(), "Search result is fail");
-        for (NewsPageItem item : searchRes) {
-            Assert.assertTrue(item.getTitle().toLowerCase().contains(elementToSearch.get("searchKeyword").toLowerCase()), "Search result is not as required");
-        }
+        Assert.assertTrue(searchRes.stream().allMatch(item -> item.getTitle().toLowerCase().contains(searchBrand)),"Search result is not as required");
     }
 
     @Test(description = "08")
@@ -157,17 +156,14 @@ public class WebArenaTest extends AbstractTest {
         List<ParagraphContent> contents = glossaryPage.getParagraphContents();
         Assert.assertTrue(titles.size() == contents.size(), "Size doesn't match");
 
-        for (int i = 0; i < titles.size(); i++) {
+        int numericalTitlesIndex = 0;
+        List<String> numericLinks = contents.get(numericalTitlesIndex).getElements();
+        Assert.assertTrue(numericLinks.stream().allMatch(item -> Character.isDigit(item.charAt(0))),"First char isn't digital");
+
+        for (int i = 1; i < titles.size(); i++) {
             String title = titles.get(i);
             List<String> content = contents.get(i).getElements();
-            for (String item : content) {
-                char itemFirstChar = item.charAt(0);
-                if (title.equals("0 - 9")) {
-                    Assert.assertTrue(Character.isDigit(itemFirstChar), "First char isn't digital");
-                } else {
-                    Assert.assertEquals(Character.toLowerCase(itemFirstChar), Character.toLowerCase(title.charAt(0)), "First letter of element isn't equal to title");
-                }
-            }
+            Assert.assertTrue(content.stream().allMatch(item -> Character.toLowerCase(item.charAt(0)) == Character.toLowerCase(title.charAt(0))),"First char isn't digital");
         }
     }
 
@@ -252,7 +248,8 @@ public class WebArenaTest extends AbstractTest {
         PhoneFinderPage phoneFinderPage = homePage.openPhoneFinderPage();
         Assert.assertTrue(phoneFinderPage.isPhoneFinderPageOpen(), "Phone finder page isn't open");
 
-        phoneFinderPage.searchAndSelect(elementToSearch.get("searchKeyword"));
+        String searchBrand = elementToSearch.get("searchKeyword").toLowerCase();
+        phoneFinderPage.searchAndSelect(searchBrand);
         String showBtnText = phoneFinderPage.getShowBtnText();
         Assert.assertTrue(showBtnText.contains("result"), "Show button isn't contain \"result\" text");
 
@@ -269,9 +266,7 @@ public class WebArenaTest extends AbstractTest {
 
         List<ModelItem> listOfModelItems = phoneFinderResultPage.getListModelItem();
         Assert.assertFalse(listOfModelItems.isEmpty(), "Search result is empty");
-        for (ModelItem item : listOfModelItems) {
-            Assert.assertTrue(item.readModel().toLowerCase().contains(elementToSearch.get("searchKeyword").toLowerCase()), "Search result is not as required");
-        }
+        Assert.assertTrue(listOfModelItems.stream().allMatch(item -> item.readModel().toLowerCase().contains(searchBrand)),"Search result is not as required");
 
         Assert.assertTrue(phoneFinderResultPage.isTextInBottomPresent(), "Text in bottom isn't present");
 
