@@ -35,9 +35,7 @@ public class GlossaryPage extends AbstractPage {
     public List<String> getParagraphTitles() {
         LOGGER.info("Get list of paragraph titles in glossary page.");
         List<String> listOfElements = new ArrayList<String>();
-        for (ExtendedWebElement oneElement : paragraphTitles){
-            listOfElements.add(oneElement.getText());
-        }
+        paragraphTitles.stream().forEachOrdered((oneElement) -> listOfElements.add(oneElement.getText()));
         return listOfElements;
     }
 
