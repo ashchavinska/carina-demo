@@ -15,6 +15,7 @@
                     <include name="verifyGlossaryParagraphTextByAlphabet"/>
                     <include name="verifyBurgerMenuInHeader"/>
                     <include name="verifyPhoneFinder"/>
+                    <include name="verifyOpinionsOnPhonePage"/>
                 </methods>
             </class>
         </classes>
