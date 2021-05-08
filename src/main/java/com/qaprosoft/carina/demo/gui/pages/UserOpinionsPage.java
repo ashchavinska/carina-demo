@@ -52,9 +52,7 @@ public class UserOpinionsPage extends AbstractPage {
 
     public List<String> getListOfCommentsScores() {
         List<String> listOfScores = new ArrayList<String>();
-        for (ExtendedWebElement score : listOfCommentsScores) {
-            listOfScores.add(score.getText());
-        }
+        listOfCommentsScores.stream().forEachOrdered((score) -> listOfScores.add(score.getText()));
         return listOfScores;
     }
 

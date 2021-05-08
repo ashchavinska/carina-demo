@@ -24,9 +24,7 @@ public class ParagraphContent extends AbstractUIObject {
     public List<String> getElements() {
         LOGGER.info("Get list of item in letter paragraph.");
         List<String> listOfElements = new ArrayList<String>();
-        for (ExtendedWebElement oneElement : title){
-            listOfElements.add(oneElement.getText());
-        }
+        title.stream().forEachOrdered((oneElement) -> listOfElements.add(oneElement.getText()));
         return listOfElements;
     }
 }
