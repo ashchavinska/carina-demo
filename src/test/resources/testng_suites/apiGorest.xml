@@ -1,0 +1,15 @@
+<suite name="ApiTest" verbose="1" parallel="methods">
+
+    <test name="Api test">
+        <classes>
+            <class name="com.qaprosoft.carina.demo.ApiGoRestTest" >
+                <methods>
+                    <include name="testPostUser"/>
+                    <include name="testGetUserByUserID"/>
+                    <include name="testDeleteUser"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

@@ -1,0 +1,13 @@
+{
+  "code": 200,
+  "meta": null,
+  "data": {
+    "id": "skip",
+    "name": "Larson5",
+    "email": "larson5@nitzsche.biz",
+    "gender": "Male",
+    "status": "Active",
+    "created_at": "skip",
+    "updated_at": "skip"
+  }
+}
